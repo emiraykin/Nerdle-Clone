@@ -1,35 +1,23 @@
-import java.io.BufferedWriter;
-import java.io.FileWriter;
+import java.io.*;
 
-public class Statistics {
+public class Statistics implements Serializable {
     private int victory;
     private int losses;
     private int unfinishedGames;
     private int avgFinishAtLines;
     private int avgSuccessTime;
-    private String fileName;
+    private static final String fileName = "GameStatistics";
 
     public Statistics() {//Constructor
+        victory = 0;
+        losses = 0;
+        unfinishedGames = 0;
+        avgFinishAtLines = 0;
+        avgSuccessTime = 0;
     }
 
-    public boolean writeFile(){
-        try {
-            BufferedWriter writer = new BufferedWriter(new FileWriter(fileName));
-            writer.write(victory + " " + losses + " " + unfinishedGames + " " + avgFinishAtLines + " " + avgSuccessTime);
-
-            writer.close();
-        }
-        catch (java.io.IOException e){
-            e.printStackTrace();
-        }
-        return false;
-    }
-
-    public boolean readFile(){
-
-
-
-        return true;
+    public String getFileName() {
+        return fileName;
     }
 
     public int getUnfinishedGames() {
