@@ -21,6 +21,8 @@ public class GUI extends JFrame {
      */
     public GUI() {
         initComponents();
+        this.setLocationRelativeTo(null);
+
     }
 
     /**
@@ -35,10 +37,10 @@ public class GUI extends JFrame {
         jButton4 = new JButton();
         jLabel3 = new JLabel();
         jLabel1 = new JLabel();
-        jButton1 = new JButton();
-        jButton2 = new JButton();
-        jButton3 = new JButton();
-        jButton5 = new JButton();
+        btnContinue = new JButton();
+        btnNewGame = new JButton();
+        btnTest = new JButton();
+        btnStatistics = new JButton();
         jLabel2 = new JLabel();
 
         jButton4.setText("Test");
@@ -56,32 +58,32 @@ public class GUI extends JFrame {
         jLabel1.setHorizontalAlignment(SwingConstants.CENTER);
         jLabel1.setText("NERDLE");
 
-        jButton1.setText("Continue");
-        jButton1.addActionListener(new ActionListener() {
+        btnContinue.setText("Continue");
+        btnContinue.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent evt) {
-                jButton1ActionPerformed(evt);
+                btnContinueActionPerformed(evt);
             }
         });
 
-        jButton2.setText("New Game");
-        jButton2.setActionCommand("");
-        jButton2.addActionListener(new ActionListener() {
+        btnNewGame.setText("New Game");
+        btnNewGame.setActionCommand("");
+        btnNewGame.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent evt) {
-                jButton2ActionPerformed(evt);
+                btnNewGameActionPerformed(evt);
             }
         });
 
-        jButton3.setText("Test");
-        jButton3.addActionListener(new ActionListener() {
+        btnTest.setText("Test");
+        btnTest.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent evt) {
-                jButton3ActionPerformed(evt);
+                btnTestActionPerformed(evt);
             }
         });
 
-        jButton5.setText("Statistics");
-        jButton5.addActionListener(new ActionListener() {
+        btnStatistics.setText("Statistics");
+        btnStatistics.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent evt) {
-                jButton5ActionPerformed(evt);
+                btnStatisticsActionPerformed(evt);
             }
         });
 
@@ -96,17 +98,17 @@ public class GUI extends JFrame {
                                         .addGroup(layout.createSequentialGroup()
                                                 .addGap(286, 286, 286)
                                                 .addGroup(layout.createParallelGroup(GroupLayout.Alignment.LEADING)
-                                                        .addComponent(jButton2, GroupLayout.PREFERRED_SIZE, 151, GroupLayout.PREFERRED_SIZE)
-                                                        .addComponent(jButton1, GroupLayout.PREFERRED_SIZE, 151, GroupLayout.PREFERRED_SIZE)
-                                                        .addComponent(jButton3, GroupLayout.PREFERRED_SIZE, 151, GroupLayout.PREFERRED_SIZE)
-                                                        .addComponent(jButton5, GroupLayout.PREFERRED_SIZE, 151, GroupLayout.PREFERRED_SIZE)))
+                                                        .addComponent(btnNewGame, GroupLayout.PREFERRED_SIZE, 151, GroupLayout.PREFERRED_SIZE)
+                                                        .addComponent(btnContinue, GroupLayout.PREFERRED_SIZE, 151, GroupLayout.PREFERRED_SIZE)
+                                                        .addComponent(btnTest, GroupLayout.PREFERRED_SIZE, 151, GroupLayout.PREFERRED_SIZE)
+                                                        .addComponent(btnStatistics, GroupLayout.PREFERRED_SIZE, 151, GroupLayout.PREFERRED_SIZE)))
                                         .addGroup(layout.createSequentialGroup()
                                                 .addGap(239, 239, 239)
                                                 .addComponent(jLabel1, GroupLayout.PREFERRED_SIZE, 245, GroupLayout.PREFERRED_SIZE))
                                         .addGroup(layout.createSequentialGroup()
                                                 .addContainerGap()
                                                 .addComponent(jLabel2)))
-                                .addContainerGap(248, Short.MAX_VALUE))
+                                .addContainerGap(266, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
                 layout.createParallelGroup(GroupLayout.Alignment.LEADING)
@@ -114,14 +116,14 @@ public class GUI extends JFrame {
                                 .addGap(41, 41, 41)
                                 .addComponent(jLabel1, GroupLayout.PREFERRED_SIZE, 110, GroupLayout.PREFERRED_SIZE)
                                 .addPreferredGap(LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addComponent(jButton2, GroupLayout.PREFERRED_SIZE, 54, GroupLayout.PREFERRED_SIZE)
+                                .addComponent(btnNewGame, GroupLayout.PREFERRED_SIZE, 54, GroupLayout.PREFERRED_SIZE)
                                 .addGap(18, 18, 18)
-                                .addComponent(jButton1, GroupLayout.PREFERRED_SIZE, 54, GroupLayout.PREFERRED_SIZE)
+                                .addComponent(btnContinue, GroupLayout.PREFERRED_SIZE, 54, GroupLayout.PREFERRED_SIZE)
                                 .addGap(18, 18, 18)
-                                .addComponent(jButton3, GroupLayout.PREFERRED_SIZE, 54, GroupLayout.PREFERRED_SIZE)
+                                .addComponent(btnTest, GroupLayout.PREFERRED_SIZE, 54, GroupLayout.PREFERRED_SIZE)
                                 .addGap(18, 18, 18)
-                                .addComponent(jButton5, GroupLayout.PREFERRED_SIZE, 54, GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(LayoutStyle.ComponentPlacement.RELATED, 27, Short.MAX_VALUE)
+                                .addComponent(btnStatistics, GroupLayout.PREFERRED_SIZE, 54, GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(LayoutStyle.ComponentPlacement.RELATED, 36, Short.MAX_VALUE)
                                 .addComponent(jLabel2)
                                 .addGap(15, 15, 15))
         );
@@ -129,23 +131,29 @@ public class GUI extends JFrame {
         pack();
     }// </editor-fold>
 
-    private void jButton1ActionPerformed(ActionEvent evt) {
+    private void btnContinueActionPerformed(ActionEvent evt) {
         // TODO add your handling code here:
     }
 
-    private void jButton2ActionPerformed(ActionEvent evt) {
-        // TODO add your handling code here:
+    private void btnNewGameActionPerformed(ActionEvent evt) {
+        NewGame newGame = new NewGame();
+        newGame.setVisible(true);
+
+        this.dispose();           // TODO add your handling code here:
     }
 
-    private void jButton3ActionPerformed(ActionEvent evt) {
-        // TODO add your handling code here:
+    private void btnTestActionPerformed(ActionEvent evt) {
+        Test test = new Test();
+        test.setVisible(true);
+
+        this.dispose();
     }
 
     private void jButton4ActionPerformed(ActionEvent evt) {
         // TODO add your handling code here:
     }
 
-    private void jButton5ActionPerformed(ActionEvent evt) {
+    private void btnStatisticsActionPerformed(ActionEvent evt) {
         // TODO add your handling code here:
     }
 
@@ -186,11 +194,11 @@ public class GUI extends JFrame {
     }
 
     // Variables declaration - do not modify
-    private JButton jButton1;
-    private JButton jButton2;
-    private JButton jButton3;
+    private JButton btnContinue;
+    private JButton btnNewGame;
+    private JButton btnStatistics;
+    private JButton btnTest;
     private JButton jButton4;
-    private JButton jButton5;
     private JLabel jLabel1;
     private JLabel jLabel2;
     private JLabel jLabel3;
