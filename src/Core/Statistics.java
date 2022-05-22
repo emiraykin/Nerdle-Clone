@@ -1,3 +1,5 @@
+package Core;
+
 import java.io.*;
 
 public class Statistics implements Serializable {
@@ -15,7 +17,12 @@ public class Statistics implements Serializable {
         avgFinishAtLines = 0;
         avgSuccessTime = 0;
     }
-
+    public void PrintStatsToTerminal(Statistics s){
+        System.out.println("Wins : " + s.getVictory() + "\nLosses : " + s.getLosses() + "\nUnfinished Games : "
+                + s.getUnfinishedGames() + "\nAverage Finish At Lines : " + s.getAvgFinishAtLines() + "\nAvg Success Time : " +
+                s.getAvgSuccessTime()
+        );
+    }
     public String getFileName() {
         return fileName;
     }
