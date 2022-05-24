@@ -2,7 +2,7 @@ package Core.GenerateEquation;
 import java.util.ArrayList;
 
 
-public class GenerateEquation {
+public class Generate {
 
     public int generateRandom(int min,int max){
          return (int) Math.floor(Math.random()*(max-min+1)+min);
@@ -63,7 +63,7 @@ public class GenerateEquation {
     }
 
 
-    public String GenerateEq(){
+    public String GenerateEquation(){
         ArrayList<Integer> eq = new ArrayList<>();
         ArrayList<Character>ops = new ArrayList<>();
         String equationString;
