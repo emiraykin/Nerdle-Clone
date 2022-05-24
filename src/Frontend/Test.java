@@ -1,3 +1,7 @@
+package Frontend;
+
+import Core.Generate;
+
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
@@ -5,13 +9,15 @@ import java.awt.event.ActionListener;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
+import static Core.Generate.GenerateEquation;
+
 /**
  * @author emirm
  */
 public class Test extends JFrame {
 
     /**
-     * Creates new form Test
+     * Creates new form Frontend.Test
      */
     public Test() {
         initComponents();
@@ -34,7 +40,7 @@ public class Test extends JFrame {
         btnGenerateEquation = new JButton();
         lblEquation = new JLabel();
         btnBack = new JButton();
-
+        lblEquation.setFont(new java.awt.Font("Segoe UI", 0, 24)); // NOI18N
         jScrollPane1.setViewportView(jEditorPane1);
 
         setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
@@ -48,7 +54,7 @@ public class Test extends JFrame {
             }
         });
 
-        lblEquation.setText("EQUATION");
+        lblEquation.setText("");
 
         btnBack.setText("Back");
         btnBack.addActionListener(new ActionListener() {
@@ -93,7 +99,9 @@ public class Test extends JFrame {
     }// </editor-fold>
 
     private void btnGenerateEquationActionPerformed(ActionEvent evt) {
-        // TODO add your handling code here:
+        String generatedText = GenerateEquation();
+        lblEquation.setText(generatedText);
+
     }
 
     private void btnBackActionPerformed(ActionEvent evt) {

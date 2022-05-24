@@ -1,15 +1,15 @@
-package Core.GenerateEquation;
+package Core;
 import java.util.ArrayList;
 
 
 public class Generate {
 
-    public int generateRandom(int min,int max){
+    public static int generateRandom(int min,int max){
          return (int) Math.floor(Math.random()*(max-min+1)+min);
     }
 
 
-    public int Calculate2(int op,int value1, int value2){
+    public static int Calculate2(int op,int value1, int value2){
         int result;
         if(op == 0){
             result = value1 + value2;;
@@ -31,7 +31,7 @@ public class Generate {
         }
         return result;
     }
-    public int Calculate(int value1, int value2,ArrayList<Character>ops){
+    public static int Calculate(int value1, int value2,ArrayList<Character>ops){
         int result;
         int op = generateRandom(0,6);
         if(op == 0){
@@ -63,7 +63,7 @@ public class Generate {
     }
 
 
-    public String GenerateEquation(){
+    public static String GenerateEquation(){
         ArrayList<Integer> eq = new ArrayList<>();
         ArrayList<Character>ops = new ArrayList<>();
         String equationString;
