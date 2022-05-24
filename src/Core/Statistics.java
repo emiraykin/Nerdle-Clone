@@ -1,13 +1,18 @@
 package Core;
 
 import java.io.*;
+import java.util.Timer;
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.util.Scanner;
 
 public class Statistics implements Serializable {
+    private boolean isPlayedBefore;
     private int victory;
     private int losses;
     private int unfinishedGames;
-    private int avgFinishAtLines;
-    private int avgSuccessTime;
+    private float avgFinishAtLines;
+    private Timer avgSuccessTime;
     private static final String fileName = "GameStatistics";
 
     public Statistics() {//Constructor
@@ -15,7 +20,7 @@ public class Statistics implements Serializable {
         losses = 0;
         unfinishedGames = 0;
         avgFinishAtLines = 0;
-        avgSuccessTime = 0;
+        avgSuccessTime = null;
     }
     public void PrintStatsToTerminal(Statistics s){
         System.out.println("Wins : " + s.getVictory() + "\nLosses : " + s.getLosses() + "\nUnfinished Games : "
@@ -23,6 +28,26 @@ public class Statistics implements Serializable {
                 s.getAvgSuccessTime()
         );
     }
+    /*public
+
+            try {
+                File myObj = new File("dosyam.txt");
+                Scanner myReader = new Scanner(myObj);
+                while (myReader.hasNextLine()) {
+                    String data = myReader.nextLine();
+                    System.out.println(data);
+                }
+                myReader.close();
+            } catch (FileNotFoundException e) {
+                System.out.println("An error occurred.");
+                e.printStackTrace();
+            }
+        }
+    }*/
+
+
+
+
     public String getFileName() {
         return fileName;
     }
@@ -51,7 +76,7 @@ public class Statistics implements Serializable {
         this.victory = victory;
     }
 
-    public int getAvgFinishAtLines() {
+    public float getAvgFinishAtLines() {
         return avgFinishAtLines;
     }
 
@@ -59,11 +84,11 @@ public class Statistics implements Serializable {
         this.avgFinishAtLines = avgFinishAtLines;
     }
 
-    public int getAvgSuccessTime() {
+    public Timer getAvgSuccessTime() {
         return avgSuccessTime;
     }
 
-    public void setAvgSuccessTime(int avgSuccessTime) {
+    public void setAvgSuccessTime(Timer avgSuccessTime) {
         this.avgSuccessTime = avgSuccessTime;
     }
 }
