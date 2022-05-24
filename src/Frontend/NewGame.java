@@ -1,3 +1,5 @@
+package Frontend;
+
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
@@ -11,7 +13,7 @@ import java.util.logging.Logger;
 public class NewGame extends JFrame {
 
     /**
-     * Creates new form NewGame
+     * Creates new form Frontend.NewGame
      */
     public NewGame() {
         initComponents();
