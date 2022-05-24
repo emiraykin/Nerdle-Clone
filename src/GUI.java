@@ -154,7 +154,10 @@ public class GUI extends JFrame {
     }
 
     private void btnStatisticsActionPerformed(ActionEvent evt) {
-        // TODO add your handling code here:
+        StatisticsFrame statisticsFrame = new StatisticsFrame();
+        statisticsFrame.setVisible(true);
+
+        this.dispose();
     }
 
     /**
