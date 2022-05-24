@@ -14,7 +14,7 @@ public class Main {
         }
         s.PrintStatsToTerminal(s);*/
         String equation = eq.GenerateEq();
-        System.out.println(equation);
+        //System.out.println(equation);
 
     }
 
