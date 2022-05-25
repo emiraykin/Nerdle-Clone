@@ -1,11 +1,15 @@
 package Frontend;
 
+import Core.Statistics;
+
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+
+import static Core.Statistics.writeStatistics;
 
 /**
  * @author emirm
@@ -18,6 +22,13 @@ public class NewGame extends JFrame {
     public NewGame() {
         initComponents();
         this.setLocationRelativeTo(null);
+        Statistics stats = new Statistics();
+        stats.setAvgFinishAtLines(2);
+        stats.setLosses(3);
+        stats.setVictory(8);
+        stats.setAvgSuccessTime(null);
+        stats.setUnfinishedGames(1);
+        writeStatistics(stats);
 
     }
 

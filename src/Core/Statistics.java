@@ -7,20 +7,21 @@ import java.io.FileNotFoundException;
 import java.util.Scanner;
 
 public class Statistics implements Serializable {
-    private boolean isPlayedBefore;
-    private int victory;
-    private int losses;
-    private int unfinishedGames;
+    private static final long serialVersionUID = 1L;
+    private static boolean isPlayedBefore;
+    private Integer victory;
+    private Integer losses;
+    private Integer unfinishedGames;
     private float avgFinishAtLines;
     private Timer avgSuccessTime;
     private static final String fileName = "GameStatistics";
 
     public Statistics() {//Constructor
-        victory = 0;
-        losses = 0;
-        unfinishedGames = 0;
-        avgFinishAtLines = 0;
-        avgSuccessTime = null;
+       /* victory = null;
+        losses = null;
+        unfinishedGames = null;
+        //avgFinishAtLines = 0;
+        avgSuccessTime = null;*/
     }
     public void PrintStatsToTerminal(Statistics s){
         System.out.println("Wins : " + s.getVictory() + "\nLosses : " + s.getLosses() + "\nUnfinished Games : "
@@ -28,6 +29,40 @@ public class Statistics implements Serializable {
                 s.getAvgSuccessTime()
         );
     }
+    public static void writeStatistics(Statistics s){
+        String filename = "Stats.dat";
+        try {
+            ObjectOutputStream writer = new ObjectOutputStream(new FileOutputStream(filename));
+            writer.writeObject(s);
+            writer.close();
+
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
+    }
+    public static Statistics readStatistics(){
+        String filename = "Stats.dat";
+        try {
+            ObjectInputStream reader = new ObjectInputStream(new FileInputStream(filename));
+            Statistics stats = (Statistics) reader.readObject();
+            reader.close();
+            return stats;
+
+        } catch (IOException e) {
+            e.printStackTrace();
+        } catch (ClassNotFoundException e) {
+            e.printStackTrace();
+        }
+        return null;
+    }
+
+
+
+
+
+
+
     /*public
 
             try {

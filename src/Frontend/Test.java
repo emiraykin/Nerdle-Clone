@@ -1,6 +1,7 @@
 package Frontend;
 
 import Core.Generate;
+import Core.Statistics;
 
 import javax.swing.*;
 import java.awt.*;
@@ -10,6 +11,7 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 
 import static Core.Generate.GenerateEquation;
+import static Core.Statistics.writeStatistics;
 
 /**
  * @author emirm
@@ -33,6 +35,8 @@ public class Test extends JFrame {
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">
     private void initComponents() {
+
+
 
         jScrollPane1 = new JScrollPane();
         jEditorPane1 = new JEditorPane();

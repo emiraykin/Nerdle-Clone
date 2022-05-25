@@ -1,5 +1,9 @@
 package Frontend;
 
+import Core.Statistics;
+
+import static Core.Statistics.readStatistics;
+
 /*
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
@@ -17,7 +21,22 @@ public class StatisticsFrame extends javax.swing.JFrame {
     public StatisticsFrame() {
         initComponents();
         this.setLocationRelativeTo(null);
-
+        try {
+            Statistics stats = readStatistics();
+            lblCompleteds.setText(String.valueOf(stats.getVictory()));
+            lblFaileds.setText(String.valueOf(stats.getLosses()));
+            lblUncompleteds.setText(String.valueOf(stats.getUnfinishedGames()));
+            lblCompAttemps.setText(String.valueOf(stats.getAvgFinishAtLines()));
+            lblCompTime.setText(String.valueOf(stats.getAvgSuccessTime()));
+        }
+        catch (Exception e){
+            //e.printStackTrace();
+            lblCompleteds.setText("-");
+            lblFaileds.setText("-");
+            lblUncompleteds.setText("-");
+            lblCompAttemps.setText("-");
+            lblCompTime.setText("-");
+        }
     }
 
     /**
