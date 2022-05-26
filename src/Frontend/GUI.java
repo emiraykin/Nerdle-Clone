@@ -1,27 +1,42 @@
-package Frontend;
-/*
+package Frontend;/*
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
- */
+*/
 
-import javax.swing.*;
-import java.awt.*;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
-import java.util.logging.Level;
-import java.util.logging.Logger;
+import Core.Statistics;
+import Frontend.NewGame;
+import Frontend.Test;
+
+import static Core.Statistics.readStatistics;
 
 /**
+ *
  * @author emirm
  */
-public class GUI extends JFrame {
+public class GUI extends javax.swing.JFrame {
 
     /**
-     * Creates new form NewJFrame1
+     * Creates new form newJava
      */
     public GUI() {
         initComponents();
         this.setLocationRelativeTo(null);
+
+        Statistics stats = readStatistics();
+        if(stats != null) {
+            lblCompleteds.setText(String.valueOf(stats.getVictory()));
+            lblFaileds.setText(String.valueOf(stats.getLosses()));
+            lblUnfinisheds.setText(String.valueOf(stats.getUnfinishedGames()));
+            lblAttemps.setText(String.valueOf(stats.getAvgFinishAtLines()));
+            lblTime.setText(String.valueOf(stats.getAvgSuccessTime()));
+        }else{
+            lblCompleteds.setText("-");
+            lblFaileds.setText("-");
+            lblUnfinisheds.setText("-");
+            lblAttemps.setText("-");
+            lblTime.setText("-");
+        }
+
 
     }
 
@@ -34,123 +49,188 @@ public class GUI extends JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">
     private void initComponents() {
 
+        jLabel8 = new javax.swing.JLabel();
+        jLabel1 = new javax.swing.JLabel();
+        btnNewGame = new javax.swing.JButton();
+        btnContinue = new javax.swing.JButton();
+        btnTest = new javax.swing.JButton();
+        jLabel2 = new javax.swing.JLabel();
+        lblNGamesCompleted = new javax.swing.JLabel();
+        lblNFailed = new javax.swing.JLabel();
+        lblNUnfinished = new javax.swing.JLabel();
+        lblNAvgTime = new javax.swing.JLabel();
+        lblNAvgAttemp = new javax.swing.JLabel();
+        lblCompleteds = new javax.swing.JLabel();
+        lblTime = new javax.swing.JLabel();
+        lblFaileds = new javax.swing.JLabel();
+        lblAttemps = new javax.swing.JLabel();
+        lblUnfinisheds = new javax.swing.JLabel();
 
-        jLabel3 = new JLabel();
-        jLabel1 = new JLabel();
-        btnContinue = new JButton();
-        btnNewGame = new JButton();
-        btnTest = new JButton();
-        btnStatistics = new JButton();
-        jLabel2 = new JLabel();
+        jLabel8.setText("-");
 
+        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
-
-        jLabel3.setText("jLabel3");
-
-        setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
-
-        jLabel1.setFont(new Font("Segoe UI", 0, 36)); // NOI18N
-        jLabel1.setHorizontalAlignment(SwingConstants.CENTER);
+        jLabel1.setFont(new java.awt.Font("Oswald SemiBold", 0, 36)); // NOI18N
+        jLabel1.setForeground(new java.awt.Color(0, 0, 153));
+        jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel1.setText("NERDLE");
-
-        btnContinue.setText("Continue");
-        btnContinue.addActionListener(new ActionListener() {
-            public void actionPerformed(ActionEvent evt) {
-                btnContinueActionPerformed(evt);
-            }
-        });
 
         btnNewGame.setText("New Game");
         btnNewGame.setActionCommand("");
-        btnNewGame.addActionListener(new ActionListener() {
-            public void actionPerformed(ActionEvent evt) {
+        btnNewGame.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnNewGameActionPerformed(evt);
             }
         });
 
-        btnTest.setText("Test");
-        btnTest.addActionListener(new ActionListener() {
-            public void actionPerformed(ActionEvent evt) {
-                btnTestActionPerformed(evt);
+        btnContinue.setText("Continue");
+        btnContinue.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnContinueActionPerformed(evt);
             }
         });
 
-        btnStatistics.setText("Statistics");
-        btnStatistics.addActionListener(new ActionListener() {
-            public void actionPerformed(ActionEvent evt) {
-                btnStatisticsActionPerformed(evt);
+        btnTest.setText("Test");
+        btnTest.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnTestActionPerformed(evt);
             }
         });
 
         jLabel2.setText("5 - 20011103 Mehmet Keçeci - 20011062 Emir Çağrı Aykın");
 
-        GroupLayout layout = new GroupLayout(getContentPane());
+        lblNGamesCompleted.setFont(new java.awt.Font("Segoe UI", 0, 24)); // NOI18N
+        lblNGamesCompleted.setText("Succesfull Games");
+
+        lblNFailed.setFont(new java.awt.Font("Segoe UI", 0, 24)); // NOI18N
+        lblNFailed.setText("Failed Games");
+
+        lblNUnfinished.setFont(new java.awt.Font("Segoe UI", 0, 24)); // NOI18N
+        lblNUnfinished.setText("Unfinished Games");
+
+        lblNAvgTime.setFont(new java.awt.Font("Segoe UI", 0, 24)); // NOI18N
+        lblNAvgTime.setText("Average Succeed Time");
+
+        lblNAvgAttemp.setFont(new java.awt.Font("Segoe UI", 0, 24)); // NOI18N
+        lblNAvgAttemp.setText("Average Succeed  Attemps");
+
+        lblCompleteds.setFont(new java.awt.Font("Segoe UI", 0, 24)); // NOI18N
+        lblCompleteds.setForeground(new java.awt.Color(0, 153, 0));
+        lblCompleteds.setText("null");
+
+        lblTime.setFont(new java.awt.Font("Segoe UI", 0, 24)); // NOI18N
+        lblTime.setForeground(new java.awt.Color(0, 153, 0));
+        lblTime.setText("null");
+
+        lblFaileds.setFont(new java.awt.Font("Segoe UI", 0, 24)); // NOI18N
+        lblFaileds.setForeground(new java.awt.Color(204, 0, 0));
+        lblFaileds.setText("null");
+
+        lblAttemps.setFont(new java.awt.Font("Segoe UI", 0, 24)); // NOI18N
+        lblAttemps.setForeground(new java.awt.Color(0, 153, 0));
+        lblAttemps.setText("null");
+
+        lblUnfinisheds.setFont(new java.awt.Font("Segoe UI", 0, 24)); // NOI18N
+        lblUnfinisheds.setForeground(new java.awt.Color(204, 204, 0));
+        lblUnfinisheds.setText("null");
+
+        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
-                layout.createParallelGroup(GroupLayout.Alignment.LEADING)
+                layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                         .addGroup(layout.createSequentialGroup()
-                                .addGroup(layout.createParallelGroup(GroupLayout.Alignment.LEADING)
-                                        .addGroup(layout.createSequentialGroup()
-                                                .addGap(286, 286, 286)
-                                                .addGroup(layout.createParallelGroup(GroupLayout.Alignment.LEADING)
-                                                        .addComponent(btnNewGame, GroupLayout.PREFERRED_SIZE, 151, GroupLayout.PREFERRED_SIZE)
-                                                        .addComponent(btnContinue, GroupLayout.PREFERRED_SIZE, 151, GroupLayout.PREFERRED_SIZE)
-                                                        .addComponent(btnTest, GroupLayout.PREFERRED_SIZE, 151, GroupLayout.PREFERRED_SIZE)
-                                                        .addComponent(btnStatistics, GroupLayout.PREFERRED_SIZE, 151, GroupLayout.PREFERRED_SIZE)))
-                                        .addGroup(layout.createSequentialGroup()
-                                                .addGap(239, 239, 239)
-                                                .addComponent(jLabel1, GroupLayout.PREFERRED_SIZE, 245, GroupLayout.PREFERRED_SIZE))
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                         .addGroup(layout.createSequentialGroup()
                                                 .addContainerGap()
-                                                .addComponent(jLabel2)))
-                                .addContainerGap(266, Short.MAX_VALUE))
+                                                .addComponent(jLabel2))
+                                        .addGroup(layout.createSequentialGroup()
+                                                .addGap(248, 248, 248)
+                                                .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 245, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                        .addGroup(layout.createSequentialGroup()
+                                                .addGap(84, 84, 84)
+                                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                                        .addComponent(btnContinue, javax.swing.GroupLayout.PREFERRED_SIZE, 151, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                                        .addComponent(btnNewGame, javax.swing.GroupLayout.PREFERRED_SIZE, 151, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                                        .addComponent(btnTest, javax.swing.GroupLayout.PREFERRED_SIZE, 151, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                                .addGap(77, 77, 77)
+                                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                                        .addGroup(layout.createSequentialGroup()
+                                                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                                                        .addComponent(lblNFailed)
+                                                                        .addComponent(lblNUnfinished)
+                                                                        .addComponent(lblNAvgTime)
+                                                                        .addComponent(lblNAvgAttemp))
+                                                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 42, Short.MAX_VALUE)
+                                                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                                                        .addComponent(lblTime)
+                                                                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                                                                .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                                                                        .addComponent(lblCompleteds)
+                                                                                        .addComponent(lblUnfinisheds, javax.swing.GroupLayout.PREFERRED_SIZE, 44, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                                                                .addComponent(lblFaileds, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 44, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                                                        .addComponent(lblAttemps)))
+                                                        .addGroup(layout.createSequentialGroup()
+                                                                .addComponent(lblNGamesCompleted)
+                                                                .addGap(0, 0, Short.MAX_VALUE)))
+                                                .addGap(52, 52, 52)))
+                                .addGap(48, 48, 48))
         );
         layout.setVerticalGroup(
-                layout.createParallelGroup(GroupLayout.Alignment.LEADING)
+                layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                         .addGroup(layout.createSequentialGroup()
-                                .addGap(41, 41, 41)
-                                .addComponent(jLabel1, GroupLayout.PREFERRED_SIZE, 110, GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addComponent(btnNewGame, GroupLayout.PREFERRED_SIZE, 54, GroupLayout.PREFERRED_SIZE)
-                                .addGap(18, 18, 18)
-                                .addComponent(btnContinue, GroupLayout.PREFERRED_SIZE, 54, GroupLayout.PREFERRED_SIZE)
-                                .addGap(18, 18, 18)
-                                .addComponent(btnTest, GroupLayout.PREFERRED_SIZE, 54, GroupLayout.PREFERRED_SIZE)
-                                .addGap(18, 18, 18)
-                                .addComponent(btnStatistics, GroupLayout.PREFERRED_SIZE, 54, GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(LayoutStyle.ComponentPlacement.RELATED, 36, Short.MAX_VALUE)
+                                .addGap(20, 20, 20)
+                                .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 110, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(37, 37, 37)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                        .addGroup(layout.createSequentialGroup()
+                                                .addComponent(btnNewGame, javax.swing.GroupLayout.PREFERRED_SIZE, 54, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                                .addGap(18, 18, 18)
+                                                .addComponent(btnContinue, javax.swing.GroupLayout.PREFERRED_SIZE, 54, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                                .addGap(18, 18, 18)
+                                                .addComponent(btnTest, javax.swing.GroupLayout.PREFERRED_SIZE, 54, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                        .addGroup(layout.createSequentialGroup()
+                                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                                        .addComponent(lblNGamesCompleted)
+                                                        .addComponent(lblCompleteds))
+                                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                                        .addComponent(lblUnfinisheds, javax.swing.GroupLayout.PREFERRED_SIZE, 51, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                                        .addComponent(lblNUnfinished))
+                                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                                        .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                                                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                                                        .addComponent(lblNFailed)
+                                                                        .addComponent(lblFaileds, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                                                .addGap(18, 18, 18)
+                                                                .addComponent(lblNAvgTime))
+                                                        .addComponent(lblTime, javax.swing.GroupLayout.Alignment.TRAILING))
+                                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                                        .addComponent(lblAttemps, javax.swing.GroupLayout.PREFERRED_SIZE, 55, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                                        .addComponent(lblNAvgAttemp))))
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 67, Short.MAX_VALUE)
                                 .addComponent(jLabel2)
-                                .addGap(15, 15, 15))
+                                .addContainerGap())
         );
 
         pack();
     }// </editor-fold>
 
-    private void btnContinueActionPerformed(ActionEvent evt) {
-        // TODO add your handling code here:
-    }
-
-    private void btnNewGameActionPerformed(ActionEvent evt) {
+    private void btnNewGameActionPerformed(java.awt.event.ActionEvent evt) {
         NewGame newGame = new NewGame();
         newGame.setVisible(true);
 
         this.dispose();           // TODO add your handling code here:
     }
 
-    private void btnTestActionPerformed(ActionEvent evt) {
-        Test test = new Test();
-        test.setVisible(true);
-
-        this.dispose();
-    }
-
-    private void jButton4ActionPerformed(ActionEvent evt) {
+    private void btnContinueActionPerformed(java.awt.event.ActionEvent evt) {
         // TODO add your handling code here:
     }
 
-    private void btnStatisticsActionPerformed(ActionEvent evt) {
-        StatisticsFrame statisticsFrame = new StatisticsFrame();
-        statisticsFrame.setVisible(true);
+    private void btnTestActionPerformed(java.awt.event.ActionEvent evt) {
+        Test test = new Test();
+        test.setVisible(true);
 
         this.dispose();
     }
@@ -165,26 +245,25 @@ public class GUI extends JFrame {
          * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html
          */
         try {
-            for (UIManager.LookAndFeelInfo info : UIManager.getInstalledLookAndFeels()) {
+            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
                 if ("Nimbus".equals(info.getName())) {
-                    UIManager.setLookAndFeel(info.getClassName());
+                    javax.swing.UIManager.setLookAndFeel(info.getClassName());
                     break;
                 }
             }
         } catch (ClassNotFoundException ex) {
-            Logger.getLogger(GUI.class.getName()).log(Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(GUI.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (InstantiationException ex) {
-            Logger.getLogger(GUI.class.getName()).log(Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(GUI.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (IllegalAccessException ex) {
-            Logger.getLogger(GUI.class.getName()).log(Level.SEVERE, null, ex);
-        } catch (UnsupportedLookAndFeelException ex) {
-            Logger.getLogger(GUI.class.getName()).log(Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(GUI.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+        } catch (javax.swing.UnsupportedLookAndFeelException ex) {
+            java.util.logging.Logger.getLogger(GUI.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
-        //</editor-fold>
         //</editor-fold>
 
         /* Create and display the form */
-        EventQueue.invokeLater(new Runnable() {
+        java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
                 new GUI().setVisible(true);
             }
@@ -192,32 +271,21 @@ public class GUI extends JFrame {
     }
 
     // Variables declaration - do not modify
-    private JButton btnContinue;
-    private JButton btnNewGame;
-    private JButton btnStatistics;
-    private JButton btnTest;
-    private JButton btnGoToTest;
-    private JLabel jLabel1;
-    private JLabel jLabel2;
-    private JLabel jLabel3;
-
-    {
-// Frontend.GUI initializer generated by IntelliJ IDEA Frontend.GUI Designer
-// >>> IMPORTANT!! <<<
-// DO NOT EDIT OR ADD ANY CODE HERE!
-        $$$setupUI$$$();
-    }
-
-    /**
-     * Method generated by IntelliJ IDEA Frontend.GUI Designer
-     * >>> IMPORTANT!! <<<
-     * DO NOT edit this method OR call it in your code!
-     *
-     * @noinspection ALL
-     */
-    private void $$$setupUI$$$() {
-        final JPanel panel1 = new JPanel();
-        panel1.setLayout(new com.intellij.uiDesigner.core.GridLayoutManager(1, 1, new Insets(0, 0, 0, 0), -1, -1));
-    }
+    private javax.swing.JButton btnContinue;
+    private javax.swing.JButton btnNewGame;
+    private javax.swing.JButton btnTest;
+    private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel jLabel8;
+    private javax.swing.JLabel lblAttemps;
+    private javax.swing.JLabel lblCompleteds;
+    private javax.swing.JLabel lblFaileds;
+    private javax.swing.JLabel lblNAvgAttemp;
+    private javax.swing.JLabel lblNAvgTime;
+    private javax.swing.JLabel lblNFailed;
+    private javax.swing.JLabel lblNGamesCompleted;
+    private javax.swing.JLabel lblNUnfinished;
+    private javax.swing.JLabel lblTime;
+    private javax.swing.JLabel lblUnfinisheds;
     // End of variables declaration
 }
