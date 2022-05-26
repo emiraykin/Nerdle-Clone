@@ -1,10 +1,14 @@
 package Frontend;
 
+import Core.Statistics;
+
 import java.awt.*;
 import java.awt.event.*;
 import java.io.*;
 import javax.swing.*;
 import java.lang.*;
+
+import static Core.Statistics.writeStatistics;
 
 public class NewGame implements ActionListener {
     int currentLine = 0;
@@ -14,6 +18,14 @@ public class NewGame implements ActionListener {
     private static JTextField[][] index = new JTextField[9][9];
 
     public NewGame (){
+        Statistics stats = new Statistics();
+        stats.setAvgFinishAtLines(2);
+        stats.setLosses(3);
+        stats.setVictory(8);
+        stats.setAvgSuccessTime(null);
+        stats.setUnfinishedGames(1);
+        writeStatistics(stats);
+
         JFrame frame = new JFrame("Nerdle");// tum pencere ve ismi
         //frame.getContentPane().add(draw);
         frame.setSize(750,500);

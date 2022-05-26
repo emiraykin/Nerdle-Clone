@@ -13,7 +13,7 @@ public class Main {
     public static void main(String[] args) throws InterruptedException {
 
         Statistics stats = new Statistics();
-        writeStatistics(stats);
+        //writeStatistics(stats);
         GUI gui = new GUI();
         gui.setVisible(true);
         Statistics s = new Statistics();
