@@ -1,8 +1,8 @@
-package Core;
+package Core.Equation;
 
 import java.util.ArrayList;
 
-public class EquationControl {
+public class EquationControls {
     /*
         CRITICAL NOTE : status and visited lists size should be initialized to Equation.length()
 
@@ -48,16 +48,16 @@ public class EquationControl {
             numbers.add(Integer.parseInt(tokens[i]));
         }
         if(ops.size() == 1){
-            return numbers.get(2) == Generate.calculateEquationResult(numbers.get(0), numbers.get(1), ops.get(0));
+            return numbers.get(2) == EquationUtilities.calculateEquationResult(numbers.get(0), numbers.get(1), ops.get(0));
         }
         else{
-            if(Generate.checkForPriority(ops)){
-                i = Generate.calculateEquationResult(numbers.get(2),numbers.get(1), ops.get(1));
-                i += Generate.calculateEquationResult(numbers.get(0),i,ops.get(0));
+            if(EquationUtilities.checkForPriority(ops)){
+                i = EquationUtilities.calculateEquationResult(numbers.get(2),numbers.get(1), ops.get(1));
+                i += EquationUtilities.calculateEquationResult(numbers.get(0),i,ops.get(0));
             }
             else {
-                i = Generate.calculateEquationResult(numbers.get(0),numbers.get(1), ops.get(0));
-                i += Generate.calculateEquationResult(numbers.get(2),i,ops.get(1));
+                i = EquationUtilities.calculateEquationResult(numbers.get(0),numbers.get(1), ops.get(0));
+                i += EquationUtilities.calculateEquationResult(numbers.get(2),i,ops.get(1));
             }
             return i == numbers.get(3);
         }

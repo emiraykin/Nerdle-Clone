@@ -1,5 +1,6 @@
 package Core;
 
+import Core.Equation.EquationControls;
 import Frontend.GUI;
 
 import java.util.ArrayList;
@@ -42,10 +43,10 @@ public class Main {
             do{
                 System.out.println("Your input: \n");
                 playerInput = sc.nextLine();              //reads string
-                if(!EquationControl.isEquationResultIsTrue(playerInput))
+                if(!EquationControls.isEquationResultIsTrue(playerInput))
                     System.out.println("This eq is not calculable!!\n Please re-enter your input.\n");
-            }while (!EquationControl.isEquationResultIsTrue(playerInput));
-            EquationControl.checkCharactersStatus(Equation,playerInput,status,ifVisited);
+            }while (!EquationControls.isEquationResultIsTrue(playerInput));
+            EquationControls.checkCharactersStatus(Equation,playerInput,status,ifVisited);
             System.out.println(status);
             counter++;
         }
