@@ -7,17 +7,22 @@ import java.awt.event.*;
 import java.io.*;
 import javax.swing.*;
 import java.lang.*;
+import java.util.ArrayList;
 
+import static Core.Equation.EquationControls.checkCharactersStatus;
+import static Core.Equation.EquationControls.isEquationResultIsTrue;
+import static Core.Generate.GenerateEquation;
 import static Core.Statistics.writeStatistics;
 
-public class NewGame implements ActionListener {
+public class NewGame {
     int currentLine = 0;
     JButton submit = new JButton("Guess");
     JLabel CorrOrWrong = new JLabel("---");
-
+    String generatedEquation ;
     private static JTextField[][] index = new JTextField[9][9];
-
+    JFrame frame;
     public NewGame (){
+        generatedEquation = GenerateEquation();
         Statistics stats = new Statistics();
         stats.setAvgFinishAtLines(2);
         stats.setLosses(3);
@@ -26,19 +31,21 @@ public class NewGame implements ActionListener {
         stats.setUnfinishedGames(1);
         writeStatistics(stats);
 
-        JFrame frame = new JFrame("Nerdle");// tum pencere ve ismi
+        frame = new JFrame("Nerdle");// tum pencere ve ismi
         //frame.getContentPane().add(draw);
         frame.setSize(750,500);
-        submit.addActionListener(this);
+        //submit.addActionListener(this);
         JPanel board = new JPanel();
         //JPanel panel = new JPanel();
-        board.setLayout(new GridLayout (9,9));
-        for (int i =0;i<9;i++)
-            for (int j=0;j<9;j++){
+        board.setLayout(new GridLayout (6,generatedEquation.length()));
+        for (int i =0;i<6;i++)
+            for (int j=0;j<generatedEquation.length();j++){
                 index[i][j]=new JTextField(1);
                 index[i][j].setText("");
-                index[i][j].setEditable(true);
-                index[i][j].setBackground(Color.GREEN);
+                //index[i][j].setEditable(true);
+                if(i!=currentLine){
+                    index[i][j].setEditable(false);
+                }
 
                 board.add(index[i][j]);
             }
@@ -54,30 +61,50 @@ public class NewGame implements ActionListener {
                 submitTestActionPerformed(evt);
             }
         });
-
+        CorrOrWrong.setText(generatedEquation);
         frame.setVisible(true);
     }
 
-    /**
-     * edited by temandr
-     */
-    public void actionPerformed(ActionEvent e){
-        if (e.getSource() == submit)
-        {
-            int[][] temp=submit();
-            write(temp);
-            try {
-                Thread.sleep(2000);
-            } catch (InterruptedException r) {
-                r.printStackTrace();
-            }
 
-
-        }
-    }
 
     private void submitTestActionPerformed(java.awt.event.ActionEvent evt) {
-        
+        String input = "";
+        for(int j=0;j<generatedEquation.length();j++){
+            input =input+index[currentLine][j].getText().charAt(0);
+        }
+        System.out.println("---------------------");
+        System.out.println(input);
+
+        if(!isEquationResultIsTrue(input)){
+            JOptionPane.showMessageDialog(frame, "This equation is not correct",
+                    "WARNING", JOptionPane.ERROR_MESSAGE);
+        }
+        else{
+            ArrayList<Integer> status = new ArrayList<Integer>();
+            ArrayList<Boolean> ifVisited = new ArrayList<Boolean>() ;
+            checkCharactersStatus(generatedEquation,input,status,ifVisited);
+            for (int i = 0; i < generatedEquation.length() ; i++) {
+                switch (status.get(i)){
+                    case 0:
+                        for (int j = currentLine; j < 6 ; j++) {
+                            index[j][i].setText(String.valueOf(input.charAt(i)));
+                            index[j][i].setEditable(false);
+                            index[j][i].setBackground(Color.green);
+                        }
+                        break;
+                    case 1:
+                        index[currentLine][i].setEditable(false);
+                        index[currentLine][i].setBackground(Color.YELLOW);
+                        break;
+                    case 2:
+                        index[currentLine][i].setEditable(false);
+                        index[currentLine][i].setBackground(Color.RED);
+                        break;
+
+
+                }
+            }
+        }
     }
 
 
@@ -94,63 +121,8 @@ public class NewGame implements ActionListener {
         return result;
     }
 
-    public static int[][] readIn(){
-        int[][] array = new int [9][9];
-        int x=0;
-        try
-        {
-            BufferedReader br = new BufferedReader(new FileReader("sudoku.txt"));
-            String s;
-            while ((s = br.readLine())!= null)
-            {
-                String[] parts = s.split(" ");
-                for (int y=0;y<9;y++)
-                    array[x][y]=Integer.parseInt(parts[y]);
-                x++;
-            }
-            br.close();
-        } catch (IOException e)
-        {
-            System.out.println("ERROR");
-        }
-        return array;
-    }
 
-    public static void write(int[][] array){
-        try
-        {
-            PrintWriter pw = new PrintWriter(new FileWriter("output.txt"));
-            for (int i=0;i<9;i++)
-            {
-                String s="";
-                for (int j=0;j<9;j++)
-                    s+=array[i][j]+" ";
-                pw.println(s);
-            }
-            pw.close();
-        } catch (IOException e)
-        {
-            System.out.println("The following error occurred " + e);
-        }
-    }
 
-   /* public static int[][] generate(){
-        int[][] temp = new int [9][9];
-        for (int i =0;i<9;i++)
-            for (int j=0;j<9;j++){
-                temp[i][j]=array[i][j];
-            }
-        int num=41;
-        while (num>0){
-            int x=(int)(Math.random()*9);
-            int y=(int)(Math.random()*9);
-            if (temp[x][y]!=0){
-                temp[x][y]=0;
-                num--;
-            }
-        }
-        return temp;
-    }*/
 
 
     public static void main(String[] args) {
