@@ -14,8 +14,8 @@ public class Main {
 
         Statistics stats = new Statistics();
         writeStatistics(stats);
-        GUI gui = new GUI();
-        gui.setVisible(true);
+       // GUI gui = new GUI();
+       // gui.setVisible(true);
         Statistics s = new Statistics();
         IO io = new IO(); // READ STATISTICS FROM FILE
 
