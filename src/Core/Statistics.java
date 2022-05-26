@@ -43,6 +43,10 @@ public class Statistics implements Serializable {
     }
     public static Statistics readStatistics(){
         String filename = "Stats.dat";
+        File f = new File("Stats.dat");
+        if(!f.exists()){
+            return null;
+        }
         try {
             ObjectInputStream reader = new ObjectInputStream(new FileInputStream(filename));
             Statistics stats = (Statistics) reader.readObject();
@@ -52,7 +56,7 @@ public class Statistics implements Serializable {
         } catch (IOException e) {
             e.printStackTrace();
         } catch (ClassNotFoundException e) {
-            e.printStackTrace();
+            return null;
         }
         return null;
     }
