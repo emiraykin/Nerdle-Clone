@@ -13,7 +13,10 @@ public class EquationControls {
      */
     public static void checkCharactersStatus(String Equation,String playerInput,ArrayList<Integer> status,ArrayList<Boolean> ifVisited){
         int i,j;
-
+        for (int k = 0; k < Equation.length(); k++) {
+            status.add(3);
+            ifVisited.add(false);
+        }
         for( i=0;i<Equation.length();i++){
             if(Equation.charAt(i) == playerInput.charAt(i)){
                 status.set(i,0);
@@ -35,6 +38,7 @@ public class EquationControls {
 
         }
     }
+    // 0/7/2=0 ' da hata veriyor!!
     public static boolean isEquationResultIsTrue(String Equation){
         int i=0;
         ArrayList<Character> ops = new ArrayList<>(2);
