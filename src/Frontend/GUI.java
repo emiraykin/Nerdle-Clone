@@ -23,19 +23,25 @@ public class GUI extends javax.swing.JFrame {
         this.setLocationRelativeTo(null);
 
         Statistics stats = readStatistics();
-        if(stats != null) {
-            lblCompleteds.setText(String.valueOf(stats.getVictory()));
-            lblFaileds.setText(String.valueOf(stats.getLosses()));
-            lblUnfinisheds.setText(String.valueOf(stats.getUnfinishedGames()));
-            lblAttemps.setText(String.valueOf(stats.getAvgFinishAtLines()));
-            lblTime.setText(String.valueOf(stats.getAvgSuccessTime()));
-        }else{
-            lblCompleteds.setText("-");
-            lblFaileds.setText("-");
-            lblUnfinisheds.setText("-");
-            lblAttemps.setText("-");
-            lblTime.setText("-");
+        try {
+            if(stats != null) {
+                lblCompleteds.setText(String.valueOf(stats.getVictory()));
+                lblFaileds.setText(String.valueOf(stats.getLosses()));
+                lblUnfinisheds.setText(String.valueOf(stats.getUnfinishedGames()));
+                lblAttemps.setText(String.valueOf(stats.getAvgFinishAtLines()));
+                lblTime.setText(String.valueOf(stats.getAvgSuccessTime()));
+            }else{
+                lblCompleteds.setText("-");
+                lblFaileds.setText("-");
+                lblUnfinisheds.setText("-");
+                lblAttemps.setText("-");
+                lblTime.setText("-");
+            }
+
+        }catch (Exception e){
+
         }
+
 
 
     }
@@ -219,7 +225,7 @@ public class GUI extends javax.swing.JFrame {
 
     private void btnNewGameActionPerformed(java.awt.event.ActionEvent evt) {
         NewGame newGame = new NewGame();
-        newGame.setVisible(true);
+        //newGame.setVisible(true);
 
         this.dispose();           // TODO add your handling code here:
     }
