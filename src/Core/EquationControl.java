@@ -4,20 +4,16 @@ import java.util.ArrayList;
 
 public class EquationControl {
     /*
-        CRITICAL NOTE : status and visited lists size should be initialized to Equation.length() or playerInput.length()
-        (don't need to say both of the strings should have equal size)
+        CRITICAL NOTE : status and visited lists size should be initialized to Equation.length()
 
         status.get(Index) == 0 -> User Input at the right location , PAINT IT GREEN
         status.get(Index) == 1 -> User Input not in the right location, but exists in the equation , PAINT IT YELLOW
         status.get(Index) == 2 -> User Input nor in the right location or exists in the equation , PAINT IT RED
-
+        status.get(Index) == 3 -> Neutral, PAINT IT GRAY or whatever
      */
-    public static ArrayList<Integer> checkCharactersStatus(String Equation,String playerInput,ArrayList<Integer> status,ArrayList<Boolean> ifVisited){
-        int i=0,j;
-        while(i<Equation.length()){
-            ifVisited.set(i,false);
-            i++;
-        }
+    public static void checkCharactersStatus(String Equation,String playerInput,ArrayList<Integer> status,ArrayList<Boolean> ifVisited){
+        int i,j;
+
         for( i=0;i<Equation.length();i++){
             if(Equation.charAt(i) == playerInput.charAt(i)){
                 status.set(i,0);
@@ -38,8 +34,32 @@ public class EquationControl {
             }
 
         }
-
-        return status;
     }
+    public static boolean isEquationResultIsTrue(String Equation){
+        int i=0;
+        ArrayList<Character> ops = new ArrayList<>(2);
+        ArrayList<Integer> numbers = new ArrayList<>();
+        for (i=0;i<Equation.length();i++)
+            if(Equation.charAt(i) == '+' || Equation.charAt(i) == '-' || Equation.charAt(i) == '*' || Equation.charAt(i) == '/')
+                ops.add(Equation.charAt(i));
 
+        String[] tokens = Equation.split("[*/+=-]");
+        for(i=0;i<tokens.length;i++){
+            numbers.add(Integer.parseInt(tokens[i]));
+        }
+        if(ops.size() == 1){
+            return numbers.get(2) == Generate.calculateEquationResult(numbers.get(0), numbers.get(1), ops.get(0));
+        }
+        else{
+            if(Generate.checkForPriority(ops)){
+                i = Generate.calculateEquationResult(numbers.get(2),numbers.get(1), ops.get(1));
+                i += Generate.calculateEquationResult(numbers.get(0),i,ops.get(0));
+            }
+            else {
+                i = Generate.calculateEquationResult(numbers.get(0),numbers.get(1), ops.get(0));
+                i += Generate.calculateEquationResult(numbers.get(2),i,ops.get(1));
+            }
+            return i == numbers.get(3);
+        }
+    }
 }
