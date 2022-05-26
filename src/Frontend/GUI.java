@@ -219,7 +219,7 @@ public class GUI extends javax.swing.JFrame {
 
     private void btnNewGameActionPerformed(java.awt.event.ActionEvent evt) {
         NewGame newGame = new NewGame();
-        newGame.setVisible(true);
+        //newGame.setVisible(true);
 
         this.dispose();           // TODO add your handling code here:
     }
