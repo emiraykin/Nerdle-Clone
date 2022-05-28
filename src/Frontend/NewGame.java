@@ -19,7 +19,7 @@ public class NewGame {
     int currentLine = 0;
     JButton submit = new JButton("Guess");
     JButton back = new JButton("Back");
-
+    JPanel main = new JPanel( new GridLayout(2, 1 ) );
     JLabel CorrOrWrong = new JLabel("---");
     String generatedEquation ;
     private static JTextField[][] index = new JTextField[9][9];
@@ -39,7 +39,8 @@ public class NewGame {
         frame.setSize(750,500);
         //submit.addActionListener(this);
         JPanel board = new JPanel();
-
+        board.setPreferredSize( new Dimension(300, 300) );
+        main.add(board);
         //JPanel panel = new JPanel();
         board.setLayout(new GridLayout (6,generatedEquation.length()));
         for (int i =0;i<6;i++)
@@ -55,9 +56,17 @@ public class NewGame {
                 board.add(index[i][j]);
             }
 
-        frame.getContentPane().add(board);
-        frame.getContentPane().add(submit,"South");
-        frame.getContentPane().add(back,"West");
+        JPanel buttonsPanel = new JPanel();
+        buttonsPanel.setPreferredSize(new Dimension(100,100));
+        buttonsPanel.add(back);
+        buttonsPanel.add(submit);
+
+        main.add(buttonsPanel);
+
+
+        frame.getContentPane().add(main);
+        //frame.getContentPane().add(submit,"South");
+        //frame.getContentPane().add(back,"West");
 
         frame.getContentPane().add(CorrOrWrong, "North");
         frame.setLocationRelativeTo(null);
