@@ -34,7 +34,7 @@ public class Generate {
                         if(EquationUtilities.checkForPriority(ops)){
                             eq.set(3,EquationUtilities.calculateEquationResult(eq.get(1),eq.get(2),ops.get(1)));
                             if(eq.get(3) != -9999)
-                                eq.set(3,EquationUtilities.calculateEquationResult(eq.get(3),eq.get(0),ops.get(0)));
+                                eq.set(3,EquationUtilities.calculateEquationResult(eq.get(0),eq.get(3),ops.get(0)));
                         }
                         System.out.println(eq);
                         equationString = Integer.toString(eq.get(0)) + ops.get(0) + (eq.get(1)) + ops.get(1) + (eq.get(2))+ "=" + (eq.get(3));
