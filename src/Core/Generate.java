@@ -14,8 +14,10 @@ public class Generate {
         String equationString;
         int max = 12;
         int min = 0;
+        int minusCTRL;
         do{
             equationString = "";
+            minusCTRL = 0;
             eq.clear();
             ops.clear();
             eq.add(EquationUtilities.generateRandom(min,max));
@@ -23,6 +25,7 @@ public class Generate {
             eq.add(EquationUtilities.generateRandom(min,max));
             EquationUtilities.selectOP(ops);
             eq.add(EquationUtilities.calculateEquationResult(eq.get(0),eq.get(1),ops.get(0)));
+
             System.out.println(eq);
             if(eq.get(3) != -9999){
                 equationString = Integer.toString(eq.get(0)) + ops.get(0) + (eq.get(1)) + "=" + (eq.get(3));
@@ -44,7 +47,8 @@ public class Generate {
             System.out.println(equationString);
             System.out.println(ops);
             System.out.println("-----------------");
-        }while (equationString.length()<7 || equationString.length() > 9);
+            if(eq.get(3) < 0) minusCTRL = 1;
+        }while (equationString.length() - minusCTRL<7|| equationString.length()- minusCTRL > 9 );
 
 
 
