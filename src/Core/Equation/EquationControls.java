@@ -23,31 +23,30 @@ public class EquationControls {
             ifVisited.add(false);
         }
         for( i=0;i<Equation.length();i++){
+            for(j=0;j<Equation.length();j++){
+                if(playerInput.charAt(i) == Equation.charAt(j) && !ifVisited.get(j)){
+                    status.set(i,1);
+                    ifVisited.set(j,true);
+                    break;
+                }
+            }
+            if (j == Equation.length()){
+                status.set(i,2);
+            }
+        }
+        for(i=0;i<Equation.length();i++){
             if(Equation.charAt(i) == playerInput.charAt(i)){
                 status.set(i,0);
                 ifVisited.set(i,true);
             }
-            else{
-                for(j=0;j<Equation.length();j++){
-                    if(playerInput.charAt(i) == Equation.charAt(j) && !ifVisited.get(j)){
-                        status.set(i,1);
-                        ifVisited.set(j,true);
-                        break;
-                    }
-                }
-                if (j == Equation.length()){
-                    status.set(i,2);
-                }
-
-            }
-
         }
+
     }
     /*
         Returns True if equation is valid
      */
     public static boolean isEquationResultIsTrue(String Equation){
-        int i=0;
+        int i;
         ArrayList<Character> ops = new ArrayList<>(2);
         ArrayList<Integer> numbers = new ArrayList<>();
         for (i=0;i<Equation.length();i++)
@@ -62,13 +61,14 @@ public class EquationControls {
             return numbers.get(2) == EquationUtilities.calculateEquationResult(numbers.get(0), numbers.get(1), ops.get(0));
         }
         else{
+            i=0;
             if(EquationUtilities.checkForPriority(ops)){
                 i = EquationUtilities.calculateEquationResult(numbers.get(2),numbers.get(1), ops.get(1));
-                i += EquationUtilities.calculateEquationResult(numbers.get(0),i,ops.get(0));
+                i = EquationUtilities.calculateEquationResult(numbers.get(0),i,ops.get(0));
             }
             else {
                 i = EquationUtilities.calculateEquationResult(numbers.get(0),numbers.get(1), ops.get(0));
-                i += EquationUtilities.calculateEquationResult(i,numbers.get(2),ops.get(1));
+                i = EquationUtilities.calculateEquationResult(i,numbers.get(2),ops.get(1));
             }
             return i == numbers.get(3);
         }
