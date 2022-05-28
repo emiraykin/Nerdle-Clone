@@ -14,10 +14,10 @@ public class Generate {
         String equationString;
         int max = 12;
         int min = 0;
-        int minusCTRL;
+        //int minusCTRL;
         do{
             equationString = "";
-            minusCTRL = 0;
+            //minusCTRL = 0;
             eq.clear();
             ops.clear();
             eq.add(EquationUtilities.generateRandom(min,max));
@@ -47,8 +47,8 @@ public class Generate {
             System.out.println(equationString);
             System.out.println(ops);
             System.out.println("-----------------");
-            if(eq.get(3) < 0) minusCTRL = 1;
-        }while (equationString.length() - minusCTRL<7|| equationString.length()- minusCTRL > 9 );
+            //if(eq.get(3) < 0) minusCTRL = 1;
+        }while (equationString.length() < 7|| equationString.length() > 9 );
 
 
 

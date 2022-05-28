@@ -57,9 +57,8 @@ public class EquationControls {
             return numbers.get(2) == EquationUtilities.calculateEquationResult(numbers.get(0), numbers.get(1), ops.get(0));
         }
         else{
-            i=0;
             if(EquationUtilities.checkForPriority(ops)){
-                i = EquationUtilities.calculateEquationResult(numbers.get(2),numbers.get(1), ops.get(1));
+                i = EquationUtilities.calculateEquationResult(numbers.get(1),numbers.get(2), ops.get(1));
                 i = EquationUtilities.calculateEquationResult(numbers.get(0),i,ops.get(0));
             }
             else {
