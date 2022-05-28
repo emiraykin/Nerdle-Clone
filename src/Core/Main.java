@@ -6,6 +6,8 @@ import Frontend.GUI;
 import java.util.ArrayList;
 import java.util.Scanner;
 
+import static Core.Equation.EquationControls.checkCharactersStatus;
+import static Core.Equation.EquationControls.isEquationResultIsTrue;
 import static Core.Statistics.readStatistics;
 import static Core.Statistics.writeStatistics;
 
@@ -22,7 +24,6 @@ public class Main {
         else{
             stats = readStatistics();
         }
-
         writeStatistics(stats);
         GUI gui = new GUI();
         gui.setVisible(true);
@@ -53,10 +54,10 @@ public class Main {
             do{
                 System.out.println("Your input: \n");
                 playerInput = sc.nextLine();              //reads string
-                if(!EquationControls.isEquationResultIsTrue(playerInput))
+                if(!isEquationResultIsTrue(playerInput))
                     System.out.println("This eq is not calculable!!\n Please re-enter your input.\n");
-            }while (!EquationControls.isEquationResultIsTrue(playerInput));
-            EquationControls.checkCharactersStatus(Equation,playerInput,status,ifVisited);
+            }while (!isEquationResultIsTrue(playerInput));
+            checkCharactersStatus(Equation,playerInput,status,ifVisited);
             System.out.println(status);
             counter++;
         }

@@ -18,6 +18,10 @@ public class EquationControls {
      */
     public static void checkCharactersStatus(String Equation,String playerInput,ArrayList<Integer> status,ArrayList<Boolean> ifVisited){
         int i,j;
+        for (int k = 0; k < Equation.length(); k++) {
+            status.add(3);
+            ifVisited.add(false);
+        }
         for( i=0;i<Equation.length();i++){
             for(j=0;j<Equation.length();j++){
                 if(playerInput.charAt(i) == Equation.charAt(j) && !ifVisited.get(j)){
