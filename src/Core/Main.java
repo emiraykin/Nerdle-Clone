@@ -6,14 +6,24 @@ import Frontend.GUI;
 import java.util.ArrayList;
 import java.util.Scanner;
 
+import static Core.Statistics.readStatistics;
 import static Core.Statistics.writeStatistics;
 
 public class Main {
+    Statistics stats;
+
     public static int[] array;
     public static void main(String[] args) throws InterruptedException {
+        Statistics stats;
+        if(readStatistics()==null){
+            stats = new Statistics();
 
-        Statistics stats = new Statistics();
-        //writeStatistics(stats);
+        }
+        else{
+            stats = readStatistics();
+        }
+
+        writeStatistics(stats);
         GUI gui = new GUI();
         gui.setVisible(true);
         Statistics s = new Statistics();

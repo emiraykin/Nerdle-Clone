@@ -17,11 +17,11 @@ public class Statistics implements Serializable {
     private static final String fileName = "GameStatistics";
 
     public Statistics() {//Constructor
-       /* victory = null;
-        losses = null;
-        unfinishedGames = null;
-        //avgFinishAtLines = 0;
-        avgSuccessTime = null;*/
+       victory = 0;
+        losses = 0;
+        unfinishedGames = 0;
+        avgFinishAtLines = 0;
+        avgSuccessTime = null;
     }
     public void PrintStatsToTerminal(Statistics s){
         System.out.println("Wins : " + s.getVictory() + "\nLosses : " + s.getLosses() + "\nUnfinished Games : "
@@ -119,7 +119,7 @@ public class Statistics implements Serializable {
         return avgFinishAtLines;
     }
 
-    public void setAvgFinishAtLines(int avgFinishAtLines) {
+    public void setAvgFinishAtLines(float avgFinishAtLines) {
         this.avgFinishAtLines = avgFinishAtLines;
     }
 
