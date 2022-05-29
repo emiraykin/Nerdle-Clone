@@ -195,7 +195,7 @@ public class Continue implements ActionListener  {
         buttonsPanel.add(btn8);
         buttonsPanel.add(btn9);
         buttonsPanel.add(btn0);
-        buttonsPanel.add(back);
+        //buttonsPanel.add(back);
         buttonsPanel.add(btnSave);
         buttonsPanel.add(btnplus);
         buttonsPanel.add(btnminus);
@@ -266,7 +266,10 @@ public class Continue implements ActionListener  {
             System.out.println(input);
 
             if(input.length() != generatedEquation.length() || !EquationRegexControl(input) ){
-                JOptionPane.showMessageDialog(frame, "This equation is not correct",
+                JOptionPane.showMessageDialog(frame, "Invalid Input Error",
+                        "WARNING", JOptionPane.ERROR_MESSAGE);
+            }else if (!isEquationResultIsTrue(input)){
+                JOptionPane.showMessageDialog(frame, "This equation is wrong",
                         "WARNING", JOptionPane.ERROR_MESSAGE);
             }
             else{
