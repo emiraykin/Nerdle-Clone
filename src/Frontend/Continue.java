@@ -12,11 +12,12 @@ import java.util.ArrayList;
 
 import static Core.Equation.EquationControls.*;
 import static Core.Generate.GenerateEquation;
+import static Core.SavedGame.readGame;
 import static Core.SavedGame.writeGame;
 import static Core.Statistics.readStatistics;
 import static Core.Statistics.writeStatistics;
 
-public class NewGame implements ActionListener  {
+public class Continue implements ActionListener  {
     int elapsedTime = 0;
     int seconds =0;
     int minutes =0;
@@ -77,7 +78,7 @@ public class NewGame implements ActionListener  {
 
 
 
-    public NewGame (){
+    public Continue (){
         if(!started){
             start();
             started=true;
@@ -99,8 +100,52 @@ public class NewGame implements ActionListener  {
         board.setPreferredSize( new Dimension(300, 500) );
         main.add(board,BorderLayout.CENTER);
         //JPanel panel = new JPanel();
+
+
+        if(readGame()!=null){
+            SavedGame savedGame = new SavedGame();
+            savedGame = readGame();
+            index = savedGame.savedMatris;
+            generatedEquation = savedGame.equation;
+            currentLine=savedGame.currentLine;
+            currentColumn=savedGame.currentColumn;
+            elapsedTime=savedGame.seconds * 1000;
+
+        }
+
+
+
         board.setLayout(new GridLayout (6,generatedEquation.length()));
-        for (int i =0;i<6;i++)
+
+        for (int i = 0; i < 6; i++) {
+            for (int j = 0; j<generatedEquation.length(); j++){
+                board.add(index[i][j]);
+                int finalI = i;
+                int finalJ = j;
+                index[i][j].addFocusListener(new FocusListener() {
+                    @Override
+                    public void focusGained(FocusEvent e) {
+                        if(index[finalI][finalJ].isEditable()){
+                            index[finalI][finalJ].setBackground(Color.CYAN);
+                            currentColumn=finalJ;
+                        }
+
+                    }
+
+                    @Override
+                    public void focusLost(FocusEvent e) {
+                        if(index[finalI][finalJ].isEditable()) {
+                            index[finalI][finalJ].setBackground(Color.WHITE);
+                        }
+
+                    }
+
+                });
+            }
+        }
+
+
+        /*for (int i =0;i<6;i++)
             for (int j=0;j<generatedEquation.length();j++){
                 index[i][j]=new JTextField(1);
                 index[i][j].setText("");
@@ -134,7 +179,7 @@ public class NewGame implements ActionListener  {
                     }
 
                 });
-            }
+            }*/
 
         JPanel buttonsPanel = new JPanel();
         buttonsPanel.setPreferredSize(new Dimension(200,100));
@@ -266,7 +311,7 @@ public class NewGame implements ActionListener  {
                     stats.setAvgSuccessTime((stats.getAvgSuccessTime() * stats.getVictory() + seconds )/(stats.getVictory() + 1)); /** burayı UNUTMA */
                     stats.setAvgFinishAtLines( ((stats.getAvgFinishAtLines() * stats.getVictory())  +currentLine + 1) / (stats.getVictory()+1));
                     stats.setVictory(stats.getVictory()+1);
-
+                    stats.setUnfinishedGames(stats.getUnfinishedGames()-1);
                     writeStatistics(stats);
                     GUI gui = new GUI();
                     gui.setVisible(true);
@@ -393,30 +438,31 @@ public class NewGame implements ActionListener  {
 
         }
         else if(e.getSource() == btnSave){
-           try{
+            try{
 
-            SavedGame savedGame = new SavedGame();
+                SavedGame savedGame = new SavedGame();
                 savedGame.equation=generatedEquation;
                 savedGame.savedMatris = index;
                 savedGame.currentLine=currentLine;
                 savedGame.currentColumn=currentColumn;
                 savedGame.seconds=seconds;
+
                 writeGame(savedGame);
 
-               stop();
-               JOptionPane.showMessageDialog(frame, "Your game is saved. Redirecting to Menu\n ",
-                       "Saved", JOptionPane.INFORMATION_MESSAGE);
-               Statistics stats = new Statistics();
-               stats=readStatistics();
-               stats.setUnfinishedGames(stats.getUnfinishedGames()+1);
-               writeStatistics(stats);
-               GUI gui = new GUI();
-               gui.setVisible(true);
+                stop();
+                JOptionPane.showMessageDialog(frame, "Your game is saved. Redirecting to Menu\n ",
+                        "Saved", JOptionPane.INFORMATION_MESSAGE);
+                Statistics stats = new Statistics();
+                stats=readStatistics();
+                stats.setUnfinishedGames(stats.getUnfinishedGames());
+                writeStatistics(stats);
+                GUI gui = new GUI();
+                gui.setVisible(true);
 
-               frame.dispose();
-           }catch (Exception ex) {
-               ex.printStackTrace();
-           }
+                frame.dispose();
+            }catch (Exception ex) {
+                ex.printStackTrace();
+            }
         }
 
     }
@@ -432,19 +478,19 @@ public class NewGame implements ActionListener  {
     }
 
     private void next() {
-       if(currentColumn<generatedEquation.length()-1){
-           index[currentLine][++currentColumn].requestFocus();
-       }
-       else {
-           index[currentLine][currentColumn].requestFocus();
-       }
+        if(currentColumn<generatedEquation.length()-1){
+            index[currentLine][++currentColumn].requestFocus();
+        }
+        else {
+            index[currentLine][currentColumn].requestFocus();
+        }
 
 
     }
 
     public int getCurrentLine() {
-         return currentLine;
-     }
+        return currentLine;
+    }
 
 
 

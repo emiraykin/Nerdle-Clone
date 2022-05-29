@@ -112,7 +112,7 @@ public class GUI extends javax.swing.JFrame {
         lblNFailed.setText("Failed Games");
 
         lblNUnfinished.setFont(new java.awt.Font("Segoe UI", 0, 24)); // NOI18N
-        lblNUnfinished.setText("Unfinished Games");
+        lblNUnfinished.setText("Unfinished Saved Games");
 
         lblNAvgTime.setFont(new java.awt.Font("Segoe UI", 0, 24)); // NOI18N
         lblNAvgTime.setText("Average Succeed Time (s)");
@@ -231,7 +231,9 @@ public class GUI extends javax.swing.JFrame {
     }
 
     private void btnContinueActionPerformed(java.awt.event.ActionEvent evt) {
-        // TODO add your handling code here:
+        Continue aContinue = new Continue();
+
+        this.dispose();
     }
 
     private void btnTestActionPerformed(java.awt.event.ActionEvent evt) {
