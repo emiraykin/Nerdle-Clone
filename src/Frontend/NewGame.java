@@ -9,8 +9,7 @@ import javax.swing.*;
 import java.lang.*;
 import java.util.ArrayList;
 
-import static Core.Equation.EquationControls.checkCharactersStatus;
-import static Core.Equation.EquationControls.isEquationResultIsTrue;
+import static Core.Equation.EquationControls.*;
 import static Core.Generate.GenerateEquation;
 import static Core.Statistics.readStatistics;
 import static Core.Statistics.writeStatistics;
@@ -312,7 +311,7 @@ public class NewGame implements ActionListener  {
             System.out.println("---------------------");
             System.out.println(input);
 
-            if(input.length() != generatedEquation.length() || !isEquationResultIsTrue(input) ){
+            if(input.length() != generatedEquation.length() || !EquationRegexControl(input) ){
                 JOptionPane.showMessageDialog(frame, "This equation is not correct",
                         "WARNING", JOptionPane.ERROR_MESSAGE);
             }
