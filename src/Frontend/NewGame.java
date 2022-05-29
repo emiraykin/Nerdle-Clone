@@ -15,8 +15,9 @@ import static Core.Generate.GenerateEquation;
 import static Core.Statistics.readStatistics;
 import static Core.Statistics.writeStatistics;
 
-public class NewGame implements ActionListener{
+public class NewGame implements ActionListener , MouseListener {
     int currentLine = 0;
+    int currentColumn = 0;
     JButton submit = new JButton("Guess");
     JButton back = new JButton("Back");
     JButton btn0 = new JButton("    0   ");
@@ -103,18 +104,163 @@ public class NewGame implements ActionListener{
         frame.getContentPane().add(CorrOrWrong, "North");
         frame.setLocationRelativeTo(null);
         frame.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
-        submit.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                submitTestActionPerformed(evt);
-            }
-        });
-        back.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                backActionPerformed(evt);
-            }
-        });
+        submit.addActionListener(this);
+
+        back.addActionListener(this);
+        btn0.addActionListener(this);
+        btn1.addActionListener(this);
+        btn2.addActionListener(this);
+        btn3.addActionListener(this);
+        btn4.addActionListener(this);
+        btn5.addActionListener(this);
+        btn6.addActionListener(this);
+        btn7.addActionListener(this);
+        btn8.addActionListener(this);
+        btn9.addActionListener(this);
         CorrOrWrong.setText(generatedEquation);
         frame.setVisible(true);
+
+        /*index[currentLine][0].addFocusListener(new FocusListener() {
+            @Override
+            public void focusGained(FocusEvent e) {
+                currentColumn = 0;
+                index[currentLine][0].setBackground(Color.CYAN);
+
+            }
+
+            @Override
+            public void focusLost(FocusEvent e) {
+                index[currentLine][0].setBackground(Color.WHITE);
+
+            }
+
+        });*/
+        index[currentLine][0].addMouseListener(this);
+            index[currentLine][1].addFocusListener(new FocusListener() {
+            @Override
+            public void focusGained(FocusEvent e) {
+                currentColumn = 1;
+                index[currentLine][1].setBackground(Color.CYAN);
+            }
+
+            @Override
+            public void focusLost(FocusEvent e) {
+                index[currentLine][1].setBackground(Color.WHITE);
+
+
+            }
+
+        });
+        index[currentLine][2].addFocusListener(new FocusListener() {
+            @Override
+            public void focusGained(FocusEvent e) {
+                currentColumn = 2;
+                index[currentLine][2].setBackground(Color.CYAN);
+
+            }
+
+            @Override
+            public void focusLost(FocusEvent e) {
+                index[currentLine][2].setBackground(Color.WHITE);
+
+            }
+
+        });
+        index[currentLine][3].addFocusListener(new FocusListener() {
+            @Override
+            public void focusGained(FocusEvent e) {
+                currentColumn = 3;
+                index[currentLine][3].setBackground(Color.CYAN);
+
+            }
+
+            @Override
+            public void focusLost(FocusEvent e) {
+                index[currentLine][3].setBackground(Color.WHITE);
+
+            }
+
+        });
+        index[currentLine][4].addFocusListener(new FocusListener() {
+            @Override
+            public void focusGained(FocusEvent e) {
+                currentColumn = 4;
+                index[currentLine][4].setBackground(Color.CYAN);
+
+            }
+
+            @Override
+            public void focusLost(FocusEvent e) {
+                index[currentLine][4].setBackground(Color.WHITE);
+
+            }
+
+        });
+        index[currentLine][5].addFocusListener(new FocusListener() {
+            @Override
+            public void focusGained(FocusEvent e) {
+                currentColumn = 5;
+                index[currentLine][5].setBackground(Color.CYAN);
+
+            }
+
+            @Override
+            public void focusLost(FocusEvent e) {
+                index[currentLine][5].setBackground(Color.WHITE);
+
+            }
+
+        });
+        index[currentLine][6].addFocusListener(new FocusListener() {
+            @Override
+            public void focusGained(FocusEvent e) {
+                currentColumn = 6;
+                index[currentLine][6].setBackground(Color.CYAN);
+
+            }
+
+            @Override
+            public void focusLost(FocusEvent e) {
+                index[currentLine][6].setBackground(Color.WHITE);
+
+            }
+
+        });
+        try{
+            index[currentLine][7].addFocusListener(new FocusListener() {
+                @Override
+                public void focusGained(FocusEvent e) {
+                    currentColumn = 7;
+                    index[currentLine][7].setBackground(Color.CYAN);
+
+                }
+
+                @Override
+                public void focusLost(FocusEvent e) {
+                    index[currentLine][7].setBackground(Color.WHITE);
+
+                }
+
+            });
+            index[currentLine][8].addFocusListener(new FocusListener() {
+                @Override
+                public void focusGained(FocusEvent e) {
+                    currentColumn = 8;
+                    index[currentLine][8].setBackground(Color.CYAN);
+
+                }
+
+                @Override
+                public void focusLost(FocusEvent e) {
+                    index[currentLine][8].setBackground(Color.WHITE);
+
+                }
+
+            });
+        }catch (Exception e){
+
+        }
+
     }
 
     public void actionPerformed(ActionEvent e){
@@ -197,49 +343,83 @@ public class NewGame implements ActionListener{
 
             }
 
+
         }
         else if( e.getSource() == back){
             GUI gui = new GUI();
             gui.setVisible(true);
             frame.dispose();
         }
+        else if (e.getSource() == btn0){
+            index[currentLine][currentColumn].setText(String.valueOf(0)) ;
+        }
+        else if (e.getSource() == btn1){
+            index[currentLine][currentColumn].setText(String.valueOf(1)) ;
+        }
+        else if (e.getSource() == btn2){
+            index[currentLine][currentColumn].setText(String.valueOf(2)) ;
+        }
+        else if (e.getSource() == btn3){
+            index[currentLine][currentColumn].setText(String.valueOf(3)) ;
+        }
+        else if (e.getSource() == btn4){
+            index[currentLine][currentColumn].setText(String.valueOf(4)) ;
+        }
+        else if (e.getSource() == btn5){
+            index[currentLine][currentColumn].setText(String.valueOf(5)) ;
+        }
+        else if (e.getSource() == btn6){
+            index[currentLine][currentColumn].setText(String.valueOf(6)) ;
+        }
+        else if (e.getSource() == btn7){
+            index[currentLine][currentColumn].setText(String.valueOf(7)) ;
+        }
+        else if (e.getSource() == btn8){
+            index[currentLine][currentColumn].setText(String.valueOf(8)) ;
+        }
+
+        else if (e.getSource() == btn9){
+            index[currentLine][currentColumn].setText(String.valueOf(9)) ;
+        }
+
+    }
+
+     public int getCurrentLine() {
+         return currentLine;
+     }
+    public void addNumberToTextBox(int currentVal) {
     }
 
 
-
-
-
-
-
-    private void submitTestActionPerformed(java.awt.event.ActionEvent evt) {
+    /*
+        private void submitTestActionPerformed (java.awt.event.ActionEvent evt){
         String input = "";
         int j = 0;
-        while (j < generatedEquation.length() && index[currentLine][j].getText().compareTo("")!=0){
-            input =input+index[currentLine][j].getText().charAt(0);
+        while (j < generatedEquation.length() && index[currentLine][j].getText().compareTo("") != 0) {
+            input = input + index[currentLine][j].getText().charAt(0);
             j++;
         }
-       /* for(int j=0;j<generatedEquation.length();j++){
+       *//* for(int j=0;j<generatedEquation.length();j++){
             input =input+index[currentLine][j].getText().charAt(0);
-        }*/
+            }*//*
         System.out.println("---------------------");
         System.out.println(input);
 
-        if(input.length() != generatedEquation.length() || !isEquationResultIsTrue(input) ){
+        if (input.length() != generatedEquation.length() || !isEquationResultIsTrue(input)) {
             JOptionPane.showMessageDialog(frame, "This equation is not correct",
                     "WARNING", JOptionPane.ERROR_MESSAGE);
-        }
-        else{
+        } else {
             ArrayList<Integer> status = new ArrayList<Integer>();
-            ArrayList<Boolean> ifVisited = new ArrayList<Boolean>() ;
-            checkCharactersStatus(generatedEquation,input,status,ifVisited);
-            for (int i = 0; i < generatedEquation.length() ; i++) {
-                switch (status.get(i)){
+            ArrayList<Boolean> ifVisited = new ArrayList<Boolean>();
+            checkCharactersStatus(generatedEquation, input, status, ifVisited);
+            for (int i = 0; i < generatedEquation.length(); i++) {
+                switch (status.get(i)) {
                     case 0:
-                        /*for (int j = currentLine; j < 6 ; j++) {
+                        *//*for (int j = currentLine; j < 6 ; j++) {
                             index[j][i].setText(String.valueOf(input.charAt(i)));
                             index[j][i].setEditable(false);
                             index[j][i].setBackground(Color.green);
-                        }*/
+                        }*//*
                         index[currentLine][i].setBackground(Color.green);
                         index[currentLine][i].setEditable(false);
 
@@ -256,28 +436,26 @@ public class NewGame implements ActionListener{
 
                 }
             }
-            if(input.compareTo(generatedEquation)==0){
+            if (input.compareTo(generatedEquation) == 0) {
                 JOptionPane.showMessageDialog(frame, " You Won.\n ",
                         "Congratulations!", JOptionPane.INFORMATION_MESSAGE);
                 Statistics stats = new Statistics();
-                stats=readStatistics();
-                stats.setAvgSuccessTime(null); /** burayı UNUTMA */
-                stats.setAvgFinishAtLines( ((stats.getAvgFinishAtLines() * stats.getVictory())  +currentLine + 1) / (stats.getVictory()+1));
-                stats.setVictory(stats.getVictory()+1);
+                stats = readStatistics();
+                stats.setAvgSuccessTime(null); *//** burayı UNUTMA *//*
+                stats.setAvgFinishAtLines(((stats.getAvgFinishAtLines() * stats.getVictory()) + currentLine + 1) / (stats.getVictory() + 1));
+                stats.setVictory(stats.getVictory() + 1);
 
                 writeStatistics(stats);
 
-            }
-            else {
-                if(currentLine==5){
+            } else {
+                if (currentLine == 5) {
                     JOptionPane.showMessageDialog(frame, "You lost.\n ",
                             "Game Over", JOptionPane.INFORMATION_MESSAGE);
                     Statistics stats = new Statistics();
-                    stats=readStatistics();
-                    stats.setLosses(stats.getLosses()+1);
+                    stats = readStatistics();
+                    stats.setLosses(stats.getLosses() + 1);
                     writeStatistics(stats);
-                }
-                else{
+                } else {
                     currentLine++;
                     for (int i = 0; i < generatedEquation.length(); i++) {
                         index[currentLine][i].setEditable(true);
@@ -290,11 +468,12 @@ public class NewGame implements ActionListener{
         }
     }
 
-    private void backActionPerformed(java.awt.event.ActionEvent evt) {
+        private void backActionPerformed (java.awt.event.ActionEvent evt){
         GUI gui = new GUI();
         gui.setVisible(true);
         frame.dispose();
-    }
+    }*/
+
 
     public static int[][] submit(){
         int[][]result = new int[9][9];
@@ -326,4 +505,31 @@ public class NewGame implements ActionListener{
         new GUI();
     }
 
+    @Override
+    public void mouseClicked(MouseEvent e) {
+        if(e.getSource() == index[0][0]){
+            currentColumn=0;
+            index[0][0].setBackground(Color.CYAN);
+        }
+    }
+
+    @Override
+    public void mousePressed(MouseEvent e) {
+
+    }
+
+    @Override
+    public void mouseReleased(MouseEvent e) {
+
+    }
+
+    @Override
+    public void mouseEntered(MouseEvent e) {
+
+    }
+
+    @Override
+    public void mouseExited(MouseEvent e) {
+
+    }
 }
