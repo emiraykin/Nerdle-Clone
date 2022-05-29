@@ -28,7 +28,7 @@ public class GUI extends javax.swing.JFrame {
                 lblCompleteds.setText(String.valueOf(stats.getVictory()));
                 lblFaileds.setText(String.valueOf(stats.getLosses()));
                 lblUnfinisheds.setText(String.valueOf(stats.getUnfinishedGames()));
-                lblAttemps.setText(String.valueOf(stats.getAvgFinishAtLines()));
+                lblAttemps.setText(String.valueOf(String.format("%.2f", stats.getAvgFinishAtLines())));
                 lblTime.setText(String.valueOf(stats.getAvgSuccessTime()));
             }else{
                 lblCompleteds.setText("-");
@@ -115,7 +115,7 @@ public class GUI extends javax.swing.JFrame {
         lblNUnfinished.setText("Unfinished Games");
 
         lblNAvgTime.setFont(new java.awt.Font("Segoe UI", 0, 24)); // NOI18N
-        lblNAvgTime.setText("Average Succeed Time");
+        lblNAvgTime.setText("Average Succeed Time (s)");
 
         lblNAvgAttemp.setFont(new java.awt.Font("Segoe UI", 0, 24)); // NOI18N
         lblNAvgAttemp.setText("Average Succeed  Attemps");

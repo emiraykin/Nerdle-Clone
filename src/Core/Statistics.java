@@ -1,27 +1,32 @@
 package Core;
 
+import javax.swing.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.io.*;
-import java.util.Timer;
+
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.util.Scanner;
 
-public class Statistics implements Serializable {
+public class Statistics implements Serializable,ActionListener {
     private static final long serialVersionUID = 1L;
     private static boolean isPlayedBefore;
     private Integer victory;
     private Integer losses;
     private Integer unfinishedGames;
     private float avgFinishAtLines;
-    private Timer avgSuccessTime;
+    private int avgSuccessTime;
     private static final String fileName = "GameStatistics";
+
+
 
     public Statistics() {//Constructor
        victory = 0;
         losses = 0;
         unfinishedGames = 0;
         avgFinishAtLines = 0;
-        avgSuccessTime = null;
+        avgSuccessTime = 0;
     }
     public void PrintStatsToTerminal(Statistics s){
         System.out.println("Wins : " + s.getVictory() + "\nLosses : " + s.getLosses() + "\nUnfinished Games : "
@@ -123,11 +128,16 @@ public class Statistics implements Serializable {
         this.avgFinishAtLines = avgFinishAtLines;
     }
 
-    public Timer getAvgSuccessTime() {
+    public int getAvgSuccessTime() {
         return avgSuccessTime;
     }
 
-    public void setAvgSuccessTime(Timer avgSuccessTime) {
+    public void setAvgSuccessTime(int avgSuccessTime) {
         this.avgSuccessTime = avgSuccessTime;
+    }
+
+    @Override
+    public void actionPerformed(ActionEvent e) {
+
     }
 }

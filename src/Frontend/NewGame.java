@@ -15,6 +15,32 @@ import static Core.Statistics.readStatistics;
 import static Core.Statistics.writeStatistics;
 
 public class NewGame implements ActionListener  {
+    int elapsedTime = 0;
+    int seconds =0;
+    int minutes =0;
+    int hours =0;
+    boolean started = false;
+    String seconds_string = String.format("%02d", seconds);
+    String minutes_string = String.format("%02d", minutes);
+    String hours_string = String.format("%02d", hours);
+    JLabel time = new JLabel("");
+
+    Timer timer = new Timer(1000, new ActionListener() {
+
+        public void actionPerformed(ActionEvent e) {
+
+            elapsedTime=elapsedTime+1000;
+            hours = (elapsedTime/3600000);
+            minutes = (elapsedTime/60000) % 60;
+            seconds = (elapsedTime/1000) % 60;
+            seconds_string = String.format("%02d", seconds);
+            minutes_string = String.format("%02d", minutes);
+            hours_string = String.format("%02d", hours);
+            time.setText(String.valueOf(seconds));
+        }
+
+    });
+
     int currentLine = 0;
     int currentColumn = 0;
     JButton submit = new JButton("Guess");
@@ -44,9 +70,14 @@ public class NewGame implements ActionListener  {
     String generatedEquation ;
     private static JTextField[][] index = new JTextField[9][9];
     JFrame frame;
-    int i,j;
+
+
 
     public NewGame (){
+        if(!started){
+            start();
+            started=true;
+        }
         generatedEquation = GenerateEquation();
        /* Statistics stats = new Statistics();
         stats.setAvgFinishAtLines(2);
@@ -76,7 +107,27 @@ public class NewGame implements ActionListener  {
                 }
                 index[i][j].setHorizontalAlignment(JTextField.CENTER);
 
+
                 board.add(index[i][j]);
+                int finalI = i;
+                int finalJ = j;
+                index[i][j].addFocusListener(new FocusListener() {
+                    @Override
+                    public void focusGained(FocusEvent e) {
+
+                        index[finalI][finalJ].setBackground(Color.CYAN);
+                        currentColumn=finalJ;
+
+                    }
+
+                    @Override
+                    public void focusLost(FocusEvent e) {
+                        index[finalI][finalJ].setBackground(Color.WHITE);
+
+
+                    }
+
+                });
             }
 
         JPanel buttonsPanel = new JPanel();
@@ -117,6 +168,8 @@ public class NewGame implements ActionListener  {
         //frame.getContentPane().add(back,"West");
 
         frame.getContentPane().add(CorrOrWrong, "North");
+        frame.getContentPane().add(time, "South");
+
         frame.setLocationRelativeTo(null);
         frame.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
         submit.addActionListener(this);
@@ -142,157 +195,6 @@ public class NewGame implements ActionListener  {
         CorrOrWrong.setText(generatedEquation);
         frame.setVisible(true);
 
-        /*index[currentLine][currentColumn].addFocusListener(new FocusListener() {
-            @Override
-            public void focusGained(FocusEvent e) {
-
-                index[currentLine][0].setBackground(Color.CYAN);
-
-            }
-
-            @Override
-            public void focusLost(FocusEvent e) {
-                index[currentLine][0].setBackground(Color.WHITE);
-
-
-            }
-
-        });
-        index[currentLine][1].addMouseListener(this);
-            index[currentLine][1].addFocusListener(new FocusListener() {
-            @Override
-            public void focusGained(FocusEvent e) {
-                currentColumn = 1;
-                index[currentLine][1].setBackground(Color.CYAN);
-            }
-
-            @Override
-            public void focusLost(FocusEvent e) {
-                index[currentLine][1].setBackground(Color.WHITE);
-
-
-            }
-
-        });
-        index[currentLine][2].addFocusListener(new FocusListener() {
-            @Override
-            public void focusGained(FocusEvent e) {
-                currentColumn = 2;
-                index[currentLine][2].setBackground(Color.CYAN);
-
-            }
-
-            @Override
-            public void focusLost(FocusEvent e) {
-                index[currentLine][2].setBackground(Color.WHITE);
-
-
-            }
-
-        });
-        index[currentLine][3].addFocusListener(new FocusListener() {
-            @Override
-            public void focusGained(FocusEvent e) {
-                currentColumn = 3;
-                index[currentLine][3].setBackground(Color.CYAN);
-
-            }
-
-            @Override
-            public void focusLost(FocusEvent e) {
-                index[currentLine][3].setBackground(Color.WHITE);
-
-
-            }
-
-        });
-        index[currentLine][4].addFocusListener(new FocusListener() {
-            @Override
-            public void focusGained(FocusEvent e) {
-                currentColumn = 4;
-                index[currentLine][4].setBackground(Color.CYAN);
-
-            }
-
-            @Override
-            public void focusLost(FocusEvent e) {
-                index[currentLine][4].setBackground(Color.WHITE);
-
-
-            }
-
-        });
-        index[currentLine][5].addFocusListener(new FocusListener() {
-            @Override
-            public void focusGained(FocusEvent e) {
-                currentColumn = 5;
-                index[currentLine][5].setBackground(Color.CYAN);
-
-            }
-
-            @Override
-            public void focusLost(FocusEvent e) {
-                index[currentLine][5].setBackground(Color.WHITE);
-
-
-            }
-
-        });
-        index[currentLine][6].addFocusListener(new FocusListener() {
-            @Override
-            public void focusGained(FocusEvent e) {
-                currentColumn = 6;
-                index[currentLine][6].setBackground(Color.CYAN);
-
-            }
-
-            @Override
-            public void focusLost(FocusEvent e) {
-                    index[currentLine][6].setBackground(Color.WHITE);
-
-
-
-
-            }
-
-        });
-        try{
-            index[currentLine][7].addFocusListener(new FocusListener() {
-                @Override
-                public void focusGained(FocusEvent e) {
-                    currentColumn = 7;
-                    index[currentLine][7].setBackground(Color.CYAN);
-
-                }
-
-                @Override
-                public void focusLost(FocusEvent e) {
-
-                        index[currentLine][7].setBackground(Color.WHITE);
-
-
-
-                }
-
-            });
-            index[currentLine][8].addFocusListener(new FocusListener() {
-                @Override
-                public void focusGained(FocusEvent e) {
-                    currentColumn = 8;
-                    index[currentLine][8].setBackground(Color.CYAN);
-
-                }
-
-                @Override
-                public void focusLost(FocusEvent e) {
-                    index[currentLine][8].setBackground(Color.WHITE);
-
-                }
-
-            });
-        }catch (Exception e){
-
-        }*/
 
     }
 
@@ -345,11 +247,16 @@ public class NewGame implements ActionListener  {
                     }
                 }
                 if(input.compareTo(generatedEquation)==0){
+                    if(started){
+                        stop();
+                        started=false;
+                    }
+
                     JOptionPane.showMessageDialog(frame, " You Won.\n ",
                             "Congratulations!", JOptionPane.INFORMATION_MESSAGE);
                     Statistics stats = new Statistics();
                     stats=readStatistics();
-                    stats.setAvgSuccessTime(null); /** burayı UNUTMA */
+                    stats.setAvgSuccessTime((stats.getAvgSuccessTime() * stats.getVictory() + seconds )/(stats.getVictory() + 1)); /** burayı UNUTMA */
                     stats.setAvgFinishAtLines( ((stats.getAvgFinishAtLines() * stats.getVictory())  +currentLine + 1) / (stats.getVictory()+1));
                     stats.setVictory(stats.getVictory()+1);
 
@@ -358,6 +265,7 @@ public class NewGame implements ActionListener  {
                 }
                 else {
                     if(currentLine==5){
+                        stop();
                         JOptionPane.showMessageDialog(frame, "You lost.\n ",
                                 "Game Over", JOptionPane.INFORMATION_MESSAGE);
                         Statistics stats = new Statistics();
@@ -384,6 +292,7 @@ public class NewGame implements ActionListener  {
 
         }
         else if( e.getSource() == back){
+            stop();
             GUI gui = new GUI();
             gui.setVisible(true);
             frame.dispose();
@@ -580,6 +489,15 @@ public class NewGame implements ActionListener  {
         gui.setVisible(true);
         frame.dispose();
     }*/
+    void start() {
+        timer.start();
+    }
+    void stop() {
+        timer.stop();
+    }
+    void reset(){
+        timer.restart();
+    }
 
 
 
@@ -599,3 +517,155 @@ public class NewGame implements ActionListener  {
 
 
 }
+/*index[currentLine][currentColumn].addFocusListener(new FocusListener() {
+            @Override
+            public void focusGained(FocusEvent e) {
+
+                index[currentLine][0].setBackground(Color.CYAN);
+
+            }
+
+            @Override
+            public void focusLost(FocusEvent e) {
+                index[currentLine][0].setBackground(Color.WHITE);
+
+
+            }
+
+        });
+        index[currentLine][1].addMouseListener(this);
+            index[currentLine][1].addFocusListener(new FocusListener() {
+            @Override
+            public void focusGained(FocusEvent e) {
+                currentColumn = 1;
+                index[currentLine][1].setBackground(Color.CYAN);
+            }
+
+            @Override
+            public void focusLost(FocusEvent e) {
+                index[currentLine][1].setBackground(Color.WHITE);
+
+
+            }
+
+        });
+        index[currentLine][2].addFocusListener(new FocusListener() {
+            @Override
+            public void focusGained(FocusEvent e) {
+                currentColumn = 2;
+                index[currentLine][2].setBackground(Color.CYAN);
+
+            }
+
+            @Override
+            public void focusLost(FocusEvent e) {
+                index[currentLine][2].setBackground(Color.WHITE);
+
+
+            }
+
+        });
+        index[currentLine][3].addFocusListener(new FocusListener() {
+            @Override
+            public void focusGained(FocusEvent e) {
+                currentColumn = 3;
+                index[currentLine][3].setBackground(Color.CYAN);
+
+            }
+
+            @Override
+            public void focusLost(FocusEvent e) {
+                index[currentLine][3].setBackground(Color.WHITE);
+
+
+            }
+
+        });
+        index[currentLine][4].addFocusListener(new FocusListener() {
+            @Override
+            public void focusGained(FocusEvent e) {
+                currentColumn = 4;
+                index[currentLine][4].setBackground(Color.CYAN);
+
+            }
+
+            @Override
+            public void focusLost(FocusEvent e) {
+                index[currentLine][4].setBackground(Color.WHITE);
+
+
+            }
+
+        });
+        index[currentLine][5].addFocusListener(new FocusListener() {
+            @Override
+            public void focusGained(FocusEvent e) {
+                currentColumn = 5;
+                index[currentLine][5].setBackground(Color.CYAN);
+
+            }
+
+            @Override
+            public void focusLost(FocusEvent e) {
+                index[currentLine][5].setBackground(Color.WHITE);
+
+
+            }
+
+        });
+        index[currentLine][6].addFocusListener(new FocusListener() {
+            @Override
+            public void focusGained(FocusEvent e) {
+                currentColumn = 6;
+                index[currentLine][6].setBackground(Color.CYAN);
+
+            }
+
+            @Override
+            public void focusLost(FocusEvent e) {
+                    index[currentLine][6].setBackground(Color.WHITE);
+
+
+
+
+            }
+
+        });
+        try{
+            index[currentLine][7].addFocusListener(new FocusListener() {
+                @Override
+                public void focusGained(FocusEvent e) {
+                    currentColumn = 7;
+                    index[currentLine][7].setBackground(Color.CYAN);
+
+                }
+
+                @Override
+                public void focusLost(FocusEvent e) {
+
+                        index[currentLine][7].setBackground(Color.WHITE);
+
+
+
+                }
+
+            });
+            index[currentLine][8].addFocusListener(new FocusListener() {
+                @Override
+                public void focusGained(FocusEvent e) {
+                    currentColumn = 8;
+                    index[currentLine][8].setBackground(Color.CYAN);
+
+                }
+
+                @Override
+                public void focusLost(FocusEvent e) {
+                    index[currentLine][8].setBackground(Color.WHITE);
+
+                }
+
+            });
+        }catch (Exception e){
+
+        }
+*/
