@@ -19,7 +19,7 @@ public class NewGame implements ActionListener , MouseListener {
     int currentLine = 0;
     int currentColumn = 0;
     JButton submit = new JButton("Guess");
-    JButton back = new JButton("Back");
+    JButton back = new JButton("Back to menu");
     JButton btn0 = new JButton("    0   ");
     JButton btn1 = new JButton("    1   ");
     JButton btn2 = new JButton("    2   ");
@@ -30,6 +30,13 @@ public class NewGame implements ActionListener , MouseListener {
     JButton btn7 = new JButton("    7   ");
     JButton btn8 = new JButton("    8   ");
     JButton btn9 = new JButton("    9   ");
+    JButton btnplus = new JButton("    +   ");
+    JButton btnminus = new JButton("    -   ");
+    JButton btncross = new JButton("    *   ");
+    JButton btnslash = new JButton("    /   ");
+    JButton btnequals = new JButton("   =  ");
+    JButton btndelete = new JButton("Delete");
+
     JButton btnSave = new JButton("Save game");
 
 
@@ -87,9 +94,16 @@ public class NewGame implements ActionListener , MouseListener {
         buttonsPanel.add(btn9);
         buttonsPanel.add(back);
         buttonsPanel.add(btnSave);
+        buttonsPanel.add(btnplus);
+        buttonsPanel.add(btnminus);
+        buttonsPanel.add(btncross);
+        buttonsPanel.add(btnslash);
+        buttonsPanel.add(btnequals);
+        buttonsPanel.add(btndelete);
+
         buttonsPanel.add(submit);
         back.setBackground(Color.PINK);
-
+        btnSave.setBackground(Color.yellow);
 
 
 
@@ -117,14 +131,21 @@ public class NewGame implements ActionListener , MouseListener {
         btn7.addActionListener(this);
         btn8.addActionListener(this);
         btn9.addActionListener(this);
+        btnequals.addActionListener(this);
+        btnplus.addActionListener(this);
+        btnminus.addActionListener(this);
+        btncross.addActionListener(this);
+        btnslash.addActionListener(this);
+        btndelete.addActionListener(this);
+        btnSave.addActionListener(this);
         CorrOrWrong.setText(generatedEquation);
         frame.setVisible(true);
 
-        /*index[currentLine][0].addFocusListener(new FocusListener() {
+        index[currentLine][currentColumn].addFocusListener(new FocusListener() {
             @Override
             public void focusGained(FocusEvent e) {
-                currentColumn = 0;
-                index[currentLine][0].setBackground(Color.CYAN);
+
+                index[currentLine][currentColumn].setBackground(Color.CYAN);
 
             }
 
@@ -132,10 +153,11 @@ public class NewGame implements ActionListener , MouseListener {
             public void focusLost(FocusEvent e) {
                 index[currentLine][0].setBackground(Color.WHITE);
 
+
             }
 
-        });*/
-        index[currentLine][0].addMouseListener(this);
+        });
+        index[currentLine][1].addMouseListener(this);
             index[currentLine][1].addFocusListener(new FocusListener() {
             @Override
             public void focusGained(FocusEvent e) {
@@ -163,6 +185,7 @@ public class NewGame implements ActionListener , MouseListener {
             public void focusLost(FocusEvent e) {
                 index[currentLine][2].setBackground(Color.WHITE);
 
+
             }
 
         });
@@ -177,6 +200,7 @@ public class NewGame implements ActionListener , MouseListener {
             @Override
             public void focusLost(FocusEvent e) {
                 index[currentLine][3].setBackground(Color.WHITE);
+
 
             }
 
@@ -193,6 +217,7 @@ public class NewGame implements ActionListener , MouseListener {
             public void focusLost(FocusEvent e) {
                 index[currentLine][4].setBackground(Color.WHITE);
 
+
             }
 
         });
@@ -208,6 +233,7 @@ public class NewGame implements ActionListener , MouseListener {
             public void focusLost(FocusEvent e) {
                 index[currentLine][5].setBackground(Color.WHITE);
 
+
             }
 
         });
@@ -221,7 +247,10 @@ public class NewGame implements ActionListener , MouseListener {
 
             @Override
             public void focusLost(FocusEvent e) {
-                index[currentLine][6].setBackground(Color.WHITE);
+                    index[currentLine][6].setBackground(Color.WHITE);
+
+
+
 
             }
 
@@ -237,7 +266,10 @@ public class NewGame implements ActionListener , MouseListener {
 
                 @Override
                 public void focusLost(FocusEvent e) {
-                    index[currentLine][7].setBackground(Color.WHITE);
+
+                        index[currentLine][7].setBackground(Color.WHITE);
+
+
 
                 }
 
@@ -333,10 +365,14 @@ public class NewGame implements ActionListener , MouseListener {
                     }
                     else{
                         currentLine++;
+                        currentColumn=0;
                         for (int i = 0; i < generatedEquation.length(); i++) {
                             index[currentLine][i].setEditable(true);
 
                         }
+
+                        index[currentLine][currentColumn].requestFocus();
+
                     }
 
                 }
@@ -352,39 +388,109 @@ public class NewGame implements ActionListener , MouseListener {
         }
         else if (e.getSource() == btn0){
             index[currentLine][currentColumn].setText(String.valueOf(0)) ;
+            next();
         }
         else if (e.getSource() == btn1){
             index[currentLine][currentColumn].setText(String.valueOf(1)) ;
+            next();
+
         }
         else if (e.getSource() == btn2){
             index[currentLine][currentColumn].setText(String.valueOf(2)) ;
+            next();
+
         }
         else if (e.getSource() == btn3){
             index[currentLine][currentColumn].setText(String.valueOf(3)) ;
+            next();
+
         }
         else if (e.getSource() == btn4){
             index[currentLine][currentColumn].setText(String.valueOf(4)) ;
+            next();
+
         }
         else if (e.getSource() == btn5){
             index[currentLine][currentColumn].setText(String.valueOf(5)) ;
+            next();
+
         }
         else if (e.getSource() == btn6){
             index[currentLine][currentColumn].setText(String.valueOf(6)) ;
+            next();
+
         }
         else if (e.getSource() == btn7){
             index[currentLine][currentColumn].setText(String.valueOf(7)) ;
+            next();
+
         }
         else if (e.getSource() == btn8){
             index[currentLine][currentColumn].setText(String.valueOf(8)) ;
+            next();
+
         }
 
         else if (e.getSource() == btn9){
             index[currentLine][currentColumn].setText(String.valueOf(9)) ;
+            next();
+
+        }
+        else if (e.getSource() == btnplus){
+            index[currentLine][currentColumn].setText("+") ;
+            next();
+
+        }
+        else if (e.getSource() == btnminus){
+            index[currentLine][currentColumn].setText("-") ;
+            next();
+
+        }
+        else if (e.getSource() == btncross){
+            index[currentLine][currentColumn].setText("*") ;
+            next();
+
+        }
+        else if (e.getSource() == btnslash){
+            index[currentLine][currentColumn].setText("/");
+            next();
+
+        }
+        else if (e.getSource() == btnequals){
+            index[currentLine][currentColumn].setText("=");
+            next();
+
+        }
+        else if (e.getSource() == btndelete){
+            index[currentLine][currentColumn].setText("");
+            back();
+
         }
 
     }
 
-     public int getCurrentLine() {
+    private void back() {
+        if(currentColumn>0){
+            index[currentLine][--currentColumn].requestFocus();
+
+        }else {
+            index[currentLine][currentColumn].requestFocus();
+
+        }
+    }
+
+    private void next() {
+       if(currentColumn<generatedEquation.length()-1){
+           index[currentLine][++currentColumn].requestFocus();
+       }
+       else {
+           index[currentLine][currentColumn].requestFocus();
+       }
+
+
+    }
+
+    public int getCurrentLine() {
          return currentLine;
      }
     public void addNumberToTextBox(int currentVal) {
@@ -507,10 +613,10 @@ public class NewGame implements ActionListener , MouseListener {
 
     @Override
     public void mouseClicked(MouseEvent e) {
-        if(e.getSource() == index[0][0]){
+       /* if(e.getSource() == index[0][0]){
             currentColumn=0;
             index[0][0].setBackground(Color.CYAN);
-        }
+        }*/
     }
 
     @Override
