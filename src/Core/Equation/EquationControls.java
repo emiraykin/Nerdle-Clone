@@ -77,6 +77,8 @@ public class EquationControls {
     }
 
     public static boolean EquationRegexControl(String Equation){
+        String pattern = "[0123456789+-/*=]def";
+        if(!Equation.matches(pattern)) return false;
         int i,equalsCounter=0,opCounter=0;
         //if equation too big return false
         if(Equation.length() > 9) return false;
