@@ -15,7 +15,7 @@ import static Core.Generate.GenerateEquation;
 import static Core.Statistics.readStatistics;
 import static Core.Statistics.writeStatistics;
 
-public class NewGame implements ActionListener , MouseListener {
+public class NewGame implements ActionListener  {
     int currentLine = 0;
     int currentColumn = 0;
     JButton submit = new JButton("Guess");
@@ -45,7 +45,7 @@ public class NewGame implements ActionListener , MouseListener {
     String generatedEquation ;
     private static JTextField[][] index = new JTextField[9][9];
     JFrame frame;
-
+    int i,j;
 
     public NewGame (){
         generatedEquation = GenerateEquation();
@@ -75,6 +75,7 @@ public class NewGame implements ActionListener , MouseListener {
                 if(i!=currentLine){
                     index[i][j].setEditable(false);
                 }
+                index[i][j].setHorizontalAlignment(JTextField.CENTER);
 
                 board.add(index[i][j]);
             }
@@ -82,7 +83,7 @@ public class NewGame implements ActionListener , MouseListener {
         JPanel buttonsPanel = new JPanel();
         buttonsPanel.setPreferredSize(new Dimension(200,100));
 
-        buttonsPanel.add(btn0);
+
         buttonsPanel.add(btn1);
         buttonsPanel.add(btn2);
         buttonsPanel.add(btn3);
@@ -92,6 +93,7 @@ public class NewGame implements ActionListener , MouseListener {
         buttonsPanel.add(btn7);
         buttonsPanel.add(btn8);
         buttonsPanel.add(btn9);
+        buttonsPanel.add(btn0);
         buttonsPanel.add(back);
         buttonsPanel.add(btnSave);
         buttonsPanel.add(btnplus);
@@ -141,11 +143,11 @@ public class NewGame implements ActionListener , MouseListener {
         CorrOrWrong.setText(generatedEquation);
         frame.setVisible(true);
 
-        index[currentLine][currentColumn].addFocusListener(new FocusListener() {
+        /*index[currentLine][currentColumn].addFocusListener(new FocusListener() {
             @Override
             public void focusGained(FocusEvent e) {
 
-                index[currentLine][currentColumn].setBackground(Color.CYAN);
+                index[currentLine][0].setBackground(Color.CYAN);
 
             }
 
@@ -291,7 +293,7 @@ public class NewGame implements ActionListener , MouseListener {
             });
         }catch (Exception e){
 
-        }
+        }*/
 
     }
 
@@ -318,7 +320,7 @@ public class NewGame implements ActionListener , MouseListener {
                 ArrayList<Integer> status = new ArrayList<Integer>();
                 ArrayList<Boolean> ifVisited = new ArrayList<Boolean>() ;
                 checkCharactersStatus(generatedEquation,input,status,ifVisited);
-                for (int i = 0; i < generatedEquation.length() ; i++) {
+                for (int  i = 0; i < generatedEquation.length() ; i++) {
                     switch (status.get(i)){
                         case 0:
                         /*for (int j = currentLine; j < 6 ; j++) {
@@ -326,17 +328,18 @@ public class NewGame implements ActionListener , MouseListener {
                             index[j][i].setEditable(false);
                             index[j][i].setBackground(Color.green);
                         }*/
-                            index[currentLine][i].setBackground(Color.green);
+                            index[currentLine][i].setBackground(Color.green.darker());
+
                             index[currentLine][i].setEditable(false);
 
                             break;
                         case 1:
                             index[currentLine][i].setEditable(false);
-                            index[currentLine][i].setBackground(Color.YELLOW);
+                            index[currentLine][i].setBackground(Color.yellow.darker());
                             break;
                         case 2:
                             index[currentLine][i].setEditable(false);
-                            index[currentLine][i].setBackground(Color.RED);
+                            index[currentLine][i].setBackground(Color.red.darker());
                             break;
 
 
@@ -493,8 +496,7 @@ public class NewGame implements ActionListener , MouseListener {
     public int getCurrentLine() {
          return currentLine;
      }
-    public void addNumberToTextBox(int currentVal) {
-    }
+
 
 
     /*
@@ -581,21 +583,6 @@ public class NewGame implements ActionListener , MouseListener {
     }*/
 
 
-    public static int[][] submit(){
-        int[][]result = new int[9][9];
-        for (int i =0;i<9;i++)
-            for (int j=0;j<9;j++){
-                try {
-                    result[i][j]=Integer.parseInt(index[i][j].getText());
-                }catch (Exception e){
-                    result[i][j]=-1;
-                }
-            }
-        return result;
-    }
-
-
-
 
 
     public static void main(String[] args) {
@@ -611,31 +598,5 @@ public class NewGame implements ActionListener , MouseListener {
         new GUI();
     }
 
-    @Override
-    public void mouseClicked(MouseEvent e) {
-       /* if(e.getSource() == index[0][0]){
-            currentColumn=0;
-            index[0][0].setBackground(Color.CYAN);
-        }*/
-    }
 
-    @Override
-    public void mousePressed(MouseEvent e) {
-
-    }
-
-    @Override
-    public void mouseReleased(MouseEvent e) {
-
-    }
-
-    @Override
-    public void mouseEntered(MouseEvent e) {
-
-    }
-
-    @Override
-    public void mouseExited(MouseEvent e) {
-
-    }
 }
