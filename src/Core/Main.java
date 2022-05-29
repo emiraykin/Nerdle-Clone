@@ -1,7 +1,7 @@
 package Core;
 
 import Core.Equation.EquationControls;
-import Frontend.GUI;
+import Frontend.*;
 
 import java.util.ArrayList;
 import java.util.Scanner;
