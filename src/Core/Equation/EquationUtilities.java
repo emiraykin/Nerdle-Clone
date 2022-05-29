@@ -17,7 +17,7 @@ public class EquationUtilities {
 
     //Randomly select operation
     public static void selectOP(ArrayList<Character> ops){
-        int op = generateRandom(0,6);
+        int op = generateRandom(0,8);
         if(op == 0) ops.add('+');
         else if( op == 1) ops.add('-');
         else if(op==2) ops.add('*');
@@ -61,17 +61,16 @@ public class EquationUtilities {
         return (ops.get(1).equals('/') || ops.get(1).equals('*')) && (ops.get(0).equals('+') || ops.get(0).equals('-'));
     }
 
-    //UNCOMPLETED - Calculate by precedence
-    public static int calculateEquation(String Equation){
-        ScriptEngineManager manager = new ScriptEngineManager();
-        ScriptEngine engine = manager.getEngineByName("js");
-        try {
-            return (int) engine.eval(Equation);
+    public static int[] selectNumberInterval(int[] MinMaxArray){
+        if(generateRandom(0,10) > 3) {
+            MinMaxArray[0] = 0;
+            MinMaxArray[1] = 10;
         }
-        catch (Exception e){
-            e.printStackTrace();
-            return -9999;
+        else {
+            MinMaxArray[0] = 11;
+            MinMaxArray[1] = 99;
         }
+        return MinMaxArray;
     }
 
 

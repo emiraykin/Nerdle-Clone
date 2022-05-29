@@ -59,7 +59,7 @@ public class EquationControls {
             if(!token.equals(""))
                 numbers.add(Integer.parseInt(token));
         }
-        if(Equation.charAt(i+1) == '-') numbers.set(numbers.size()-1,Integer.parseInt(String.valueOf(- numbers.get(numbers.size() - 1))));
+        if(Equation.charAt(i+1) == '-') numbers.set(numbers.size()-1,-numbers.get(numbers.size()-1));
         if(ops.size() == 1){
             return numbers.get(2) == EquationUtilities.calculateEquationResult(numbers.get(0), numbers.get(1), ops.get(0));
         }

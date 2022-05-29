@@ -1,4 +1,5 @@
 package Core;
+import Core.Equation.EquationControls;
 import Core.Equation.EquationUtilities;
 
 import java.util.ArrayList;
@@ -12,17 +13,24 @@ public class Generate {
         ArrayList<Integer> eq = new ArrayList<>();
         ArrayList<Character>ops = new ArrayList<>();
         String equationString;
-        int max = 12;
-        int min = 0;
+        int [] MinMaxArray = {0,0};
+        int select;
         //int minusCTRL;
         do{
             equationString = "";
             //minusCTRL = 0;
             eq.clear();
             ops.clear();
-            eq.add(EquationUtilities.generateRandom(min,max));
-            eq.add(EquationUtilities.generateRandom(min,max));
-            eq.add(EquationUtilities.generateRandom(min,max));
+
+            EquationUtilities.selectNumberInterval(MinMaxArray);
+            eq.add(EquationUtilities.generateRandom(MinMaxArray[0],MinMaxArray[1]));
+
+            EquationUtilities.selectNumberInterval(MinMaxArray);
+            eq.add(EquationUtilities.generateRandom(MinMaxArray[0],MinMaxArray[1]));
+
+            EquationUtilities.selectNumberInterval(MinMaxArray);
+            eq.add(EquationUtilities.generateRandom(MinMaxArray[0],MinMaxArray[1]));
+
             EquationUtilities.selectOP(ops);
             eq.add(EquationUtilities.calculateEquationResult(eq.get(0),eq.get(1),ops.get(0)));
 
@@ -30,7 +38,10 @@ public class Generate {
             if(eq.get(3) != -9999){
                 equationString = Integer.toString(eq.get(0)) + ops.get(0) + (eq.get(1)) + "=" + (eq.get(3));
                 if(equationString.length()<7){
-                    EquationUtilities.selectOP(ops);
+                    do{ // TO INCREASE VARIETY IN EQUATION
+                        EquationUtilities.selectOP(ops);
+                        if(ops.get(0) == '/' && ops.get(1) == '/') ops.remove(1);
+                    }while (ops.size() == 1);
                     eq.set(3,EquationUtilities.calculateEquationResult(eq.get(3),eq.get(2),ops.get(1)));
                     System.out.println(eq);
                     if(eq.get(3) != -9999){
