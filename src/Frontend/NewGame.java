@@ -220,10 +220,10 @@ public class NewGame implements ActionListener  {
             System.out.println("---------------------");
             System.out.println(input);
 
-            /*if(input.length() != generatedEquation.length() || !EquationRegexControl(input) ){
+            if(input.length() != generatedEquation.length() || !EquationRegexControl(input) ){
                 JOptionPane.showMessageDialog(frame, "Invalid Input Error",
                         "WARNING", JOptionPane.ERROR_MESSAGE);
-            }else*/ if (!isEquationResultIsTrue(input)){
+            }else if (!isEquationResultIsTrue(input)){
             JOptionPane.showMessageDialog(frame, "This equation is wrong",
                     "WARNING", JOptionPane.ERROR_MESSAGE);
             }
