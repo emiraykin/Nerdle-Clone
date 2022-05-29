@@ -24,6 +24,8 @@ public class NewGame implements ActionListener  {
     String minutes_string = String.format("%02d", minutes);
     String hours_string = String.format("%02d", hours);
     JLabel time = new JLabel("");
+    JLabel footer = new JLabel("5 - 20011103 Mehmet Keçeci - 20011062 Emir Çağrı Aykın");
+
 
     Timer timer = new Timer(1000, new ActionListener() {
 
@@ -43,7 +45,7 @@ public class NewGame implements ActionListener  {
 
     int currentLine = 0;
     int currentColumn = 0;
-    JButton submit = new JButton("Guess");
+    JButton submit = new JButton("   Guess   ");
     JButton back = new JButton("Back to menu");
     JButton btn0 = new JButton("    0   ");
     JButton btn1 = new JButton("    1   ");
@@ -60,7 +62,7 @@ public class NewGame implements ActionListener  {
     JButton btncross = new JButton("    *   ");
     JButton btnslash = new JButton("    /   ");
     JButton btnequals = new JButton("   =  ");
-    JButton btndelete = new JButton("Delete");
+    JButton btndelete = new JButton("   Delete   ");
 
     JButton btnSave = new JButton("Save game");
 
@@ -114,16 +116,18 @@ public class NewGame implements ActionListener  {
                 index[i][j].addFocusListener(new FocusListener() {
                     @Override
                     public void focusGained(FocusEvent e) {
-
-                        index[finalI][finalJ].setBackground(Color.CYAN);
-                        currentColumn=finalJ;
+                        if(index[finalI][finalJ].isEditable()){
+                            index[finalI][finalJ].setBackground(Color.CYAN);
+                            currentColumn=finalJ;
+                        }
 
                     }
 
                     @Override
                     public void focusLost(FocusEvent e) {
-                        index[finalI][finalJ].setBackground(Color.WHITE);
-
+                        if(index[finalI][finalJ].isEditable()) {
+                            index[finalI][finalJ].setBackground(Color.WHITE);
+                        }
 
                     }
 
@@ -156,7 +160,7 @@ public class NewGame implements ActionListener  {
         buttonsPanel.add(submit);
         back.setBackground(Color.PINK);
         btnSave.setBackground(Color.yellow);
-
+        buttonsPanel.add(time);
 
 
 
@@ -168,7 +172,8 @@ public class NewGame implements ActionListener  {
         //frame.getContentPane().add(back,"West");
 
         frame.getContentPane().add(CorrOrWrong, "North");
-        frame.getContentPane().add(time, "South");
+        //frame.getContentPane().add(time, "South");
+        frame.getContentPane().add(footer, "South");
 
         frame.setLocationRelativeTo(null);
         frame.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
@@ -252,7 +257,7 @@ public class NewGame implements ActionListener  {
                         started=false;
                     }
 
-                    JOptionPane.showMessageDialog(frame, " You Won.\n ",
+                    JOptionPane.showMessageDialog(frame, " You Won. Redirecting to Menu\n ",
                             "Congratulations!", JOptionPane.INFORMATION_MESSAGE);
                     Statistics stats = new Statistics();
                     stats=readStatistics();
@@ -261,17 +266,25 @@ public class NewGame implements ActionListener  {
                     stats.setVictory(stats.getVictory()+1);
 
                     writeStatistics(stats);
+                    GUI gui = new GUI();
+                    gui.setVisible(true);
+
+                    frame.dispose();
 
                 }
                 else {
                     if(currentLine==5){
                         stop();
-                        JOptionPane.showMessageDialog(frame, "You lost.\n ",
+                        JOptionPane.showMessageDialog(frame, "You lost. Redirecting to Menu\n ",
                                 "Game Over", JOptionPane.INFORMATION_MESSAGE);
                         Statistics stats = new Statistics();
                         stats=readStatistics();
                         stats.setLosses(stats.getLosses()+1);
                         writeStatistics(stats);
+                        GUI gui = new GUI();
+                        gui.setVisible(true);
+
+                        frame.dispose();
                     }
                     else{
                         currentLine++;
