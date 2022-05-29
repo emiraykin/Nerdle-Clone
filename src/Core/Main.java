@@ -29,7 +29,7 @@ public class Main {
         gui.setVisible(true);
         Statistics s = new Statistics();
         IO io = new IO(); // READ STATISTICS FROM FILE
-
+/*
 
         //PLAYABLE DEMO ON THE TERMINAL
         Scanner sc= new Scanner(System.in);
