@@ -62,7 +62,26 @@ public class Generate {
         }while (equationString.length() < 7|| equationString.length() > 9 );
 
 
-
         return equationString;
+    }
+
+    public static boolean isEquationLengthValid(String eq){
+        return eq.length() >= 7 && eq.length() <= 9;
+    }
+
+    public static boolean hasExactlyOneEquals(String eq){
+        int counter = 0;
+        for (int i=0; i< eq.length();i++){
+            if (eq.charAt(i) == '=') counter++;
+        }
+        return counter == 1;
+    }
+
+    public static boolean hasValidAmountOfOperators(String eq){
+        int counter = 0;
+        for (int i=0; i< eq.length();i++){
+            if (EquationUtilities.isOperator(eq.charAt(i))) counter++;
+        }
+        return counter == 1 || counter == 2;
     }
 }

@@ -1,8 +1,5 @@
 package Frontend;
 
-import Core.Generate;
-import Core.Statistics;
-
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
@@ -11,17 +8,16 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 
 import static Core.Generate.GenerateEquation;
-import static Core.Statistics.writeStatistics;
 
 /**
  * @author emirm
  */
-public class Test extends JFrame {
+public class TestPage extends JFrame {
 
     /**
      * Creates new form Frontend.Test
      */
-    public Test() {
+    public TestPage() {
         initComponents();
         this.setLocationRelativeTo(null);
 
@@ -132,20 +128,20 @@ public class Test extends JFrame {
                 }
             }
         } catch (ClassNotFoundException ex) {
-            Logger.getLogger(Test.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(TestPage.class.getName()).log(Level.SEVERE, null, ex);
         } catch (InstantiationException ex) {
-            Logger.getLogger(Test.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(TestPage.class.getName()).log(Level.SEVERE, null, ex);
         } catch (IllegalAccessException ex) {
-            Logger.getLogger(Test.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(TestPage.class.getName()).log(Level.SEVERE, null, ex);
         } catch (UnsupportedLookAndFeelException ex) {
-            Logger.getLogger(Test.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(TestPage.class.getName()).log(Level.SEVERE, null, ex);
         }
         //</editor-fold>
 
         /* Create and display the form */
         EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new Test().setVisible(true);
+                new TestPage().setVisible(true);
             }
         });
     }
@@ -172,9 +168,10 @@ public class Test extends JFrame {
      *
      * @noinspection ALL
      */
+
     private void $$$setupUI$$$() {
         final JPanel panel1 = new JPanel();
-        panel1.setLayout(new com.intellij.uiDesigner.core.GridLayoutManager(1, 1, new Insets(0, 0, 0, 0), -1, -1));
+        //panel1.setLayout(new com.intellij.uiDesigner.core.GridLayoutManager(1, 1, new Insets(0, 0, 0, 0), -1, -1));
     }
     // End of variables declaration
 }
