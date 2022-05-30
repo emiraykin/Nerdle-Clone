@@ -67,7 +67,7 @@ public class Continue implements ActionListener  {
     JButton btnequals = new JButton("   =  ");
     JButton btndelete = new JButton("   Delete   ");
 
-    JButton btnSave = new JButton("Save game");
+    JButton btnSave = new JButton("Continue later");
 
 
     JPanel main = new JPanel( new BorderLayout() );
@@ -84,14 +84,6 @@ public class Continue implements ActionListener  {
             started=true;
         }
         generatedEquation = GenerateEquation();
-       /* Statistics stats = new Statistics();
-        stats.setAvgFinishAtLines(2);
-        stats.setLosses(3);
-        stats.setVictory(8);
-        stats.setAvgSuccessTime(null);
-        stats.setUnfinishedGames(1);
-        writeStatistics(stats);*/
-
         frame = new JFrame("Nerdle");// tum pencere ve ismi
         //frame.getContentPane().add(draw);
         frame.setSize(750,500);
@@ -144,43 +136,6 @@ public class Continue implements ActionListener  {
             }
         }
 
-
-        /*for (int i =0;i<6;i++)
-            for (int j=0;j<generatedEquation.length();j++){
-                index[i][j]=new JTextField(1);
-                index[i][j].setText("");
-                index[i][j].setBounds(10,0,0,0);
-                //index[i][j].setEditable(true);
-                if(i!=currentLine){
-                    index[i][j].setEditable(false);
-                }
-                index[i][j].setHorizontalAlignment(JTextField.CENTER);
-
-
-                board.add(index[i][j]);
-                int finalI = i;
-                int finalJ = j;
-                index[i][j].addFocusListener(new FocusListener() {
-                    @Override
-                    public void focusGained(FocusEvent e) {
-                        if(index[finalI][finalJ].isEditable()){
-                            index[finalI][finalJ].setBackground(Color.CYAN);
-                            currentColumn=finalJ;
-                        }
-
-                    }
-
-                    @Override
-                    public void focusLost(FocusEvent e) {
-                        if(index[finalI][finalJ].isEditable()) {
-                            index[finalI][finalJ].setBackground(Color.WHITE);
-                        }
-
-                    }
-
-                });
-            }*/
-
         JPanel buttonsPanel = new JPanel();
         buttonsPanel.setPreferredSize(new Dimension(200,100));
 
@@ -197,11 +152,11 @@ public class Continue implements ActionListener  {
         buttonsPanel.add(btn0);
         //buttonsPanel.add(back);
         buttonsPanel.add(btnSave);
-        buttonsPanel.add(btnplus);
-        buttonsPanel.add(btnminus);
-        buttonsPanel.add(btncross);
-        buttonsPanel.add(btnslash);
-        buttonsPanel.add(btnequals);
+        btnplus.setFont(new Font("Arial", Font.PLAIN, 16)); buttonsPanel.add(btnplus);
+        btnminus.setFont(new Font("Arial", Font.PLAIN, 16)); buttonsPanel.add(btnminus);
+        btncross.setFont(new Font("Arial", Font.PLAIN, 16));buttonsPanel.add(btncross);
+        btnslash.setFont(new Font("Arial", Font.PLAIN, 16));buttonsPanel.add(btnslash);
+        btnequals.setFont(new Font("Arial", Font.PLAIN, 16));buttonsPanel.add(btnequals);
         buttonsPanel.add(btndelete);
 
         buttonsPanel.add(submit);
@@ -215,11 +170,7 @@ public class Continue implements ActionListener  {
 
 
         frame.getContentPane().add(main);
-        //frame.getContentPane().add(submit,"South");
-        //frame.getContentPane().add(back,"West");
-
         frame.getContentPane().add(CorrOrWrong, "North");
-        //frame.getContentPane().add(time, "South");
         frame.getContentPane().add(footer, "South");
 
         frame.setLocationRelativeTo(null);
@@ -246,7 +197,6 @@ public class Continue implements ActionListener  {
         btnSave.addActionListener(this);
         CorrOrWrong.setText(generatedEquation);
         frame.setVisible(true);
-
 
     }
 
@@ -316,6 +266,8 @@ public class Continue implements ActionListener  {
                     stats.setVictory(stats.getVictory()+1);
                     stats.setUnfinishedGames(stats.getUnfinishedGames()-1);
                     writeStatistics(stats);
+                    File file = new File("SavedGame.dat");
+                    file.delete();
                     GUI gui = new GUI();
                     gui.setVisible(true);
 
@@ -331,6 +283,8 @@ public class Continue implements ActionListener  {
                         stats=readStatistics();
                         stats.setLosses(stats.getLosses()+1);
                         writeStatistics(stats);
+                        File file = new File("SavedGame.dat");
+                        file.delete();
                         GUI gui = new GUI();
                         gui.setVisible(true);
 
@@ -436,8 +390,9 @@ public class Continue implements ActionListener  {
 
         }
         else if (e.getSource() == btndelete){
-            index[currentLine][currentColumn].setText("");
             back();
+            index[currentLine][currentColumn].setText("");
+
 
         }
         else if(e.getSource() == btnSave){
@@ -472,9 +427,19 @@ public class Continue implements ActionListener  {
 
     private void back() {
         if(currentColumn>0){
-            index[currentLine][--currentColumn].requestFocus();
+            if(index[currentLine][currentColumn].getText().compareTo("")==0){
+                index[currentLine][--currentColumn].requestFocus();
+            }
+
+            else{
+                index[currentLine][currentColumn].requestFocus();
+                index[currentLine][currentColumn].setText("");
+            }
+
 
         }else {
+            if(index[currentLine][currentColumn].getText().compareTo("")!=0)
+                index[currentLine][currentColumn].setText("");
             index[currentLine][currentColumn].requestFocus();
 
         }

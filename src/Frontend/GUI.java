@@ -7,6 +7,9 @@ import Core.Statistics;
 import Frontend.NewGame;
 import Frontend.Test;
 
+import javax.swing.*;
+import java.io.File;
+
 import static Core.Statistics.readStatistics;
 
 /**
@@ -37,7 +40,10 @@ public class GUI extends javax.swing.JFrame {
                 lblAttemps.setText("-");
                 lblTime.setText("-");
             }
-
+            File f = new File("SavedGame.dat");
+            if (!f.exists()){
+                btnContinue.setVisible(false);
+            }
         }catch (Exception e){
 
         }
@@ -224,10 +230,21 @@ public class GUI extends javax.swing.JFrame {
     }// </editor-fold>
 
     private void btnNewGameActionPerformed(java.awt.event.ActionEvent evt) {
-        NewGame newGame = new NewGame();
-        //newGame.setVisible(true);
+       // NewGame newGame = new NewGame();
+        File file = new File("SavedGame.dat");
+        if(file.exists()){
+            int dialogButton = JOptionPane.YES_NO_OPTION;
+            int dialogResult = JOptionPane.showConfirmDialog (this, "Your saved game will be deleted. Are you sure you want to start a new game?","Warning",dialogButton);
+            if(dialogResult == JOptionPane.YES_OPTION){
+                file.delete();
+                NewGame newGame = new NewGame();
+                this.dispose();
+            }
+        }else{
+            NewGame newGame = new NewGame();
+            this.dispose();
+        }
 
-        this.dispose();           // TODO add your handling code here:
     }
 
     private void btnContinueActionPerformed(java.awt.event.ActionEvent evt) {
