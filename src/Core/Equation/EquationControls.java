@@ -105,12 +105,11 @@ public class EquationControls {
                 equalsCounter++;
 
             if(flagOperationAfterEqualsSign){
-                //if there is an operator right after equals sign and it is not a minus sign, return false
-                if(Equation.charAt(i-1) == '=' && (Equation.charAt(i) == ('+') || Equation.charAt(i) == ('*') || Equation.charAt(i) == ('/')))
-                    return false;
                 //if there is an operator after equals sign return false
-                else if(EquationUtilities.isOperator(Equation.charAt(i))){
-                    return false;
+                if(Equation.charAt(i-1) == '=' && Equation.charAt(i) != '-'){
+                    if((EquationUtilities.isOperator(Equation.charAt(i)) )){
+                        return false;
+                    }
                 }
             }
             if (Equation.charAt(i) == '=') flagOperationAfterEqualsSign = true;
