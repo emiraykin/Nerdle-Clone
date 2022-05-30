@@ -28,7 +28,6 @@ public class NewGame implements ActionListener  {
     JLabel time = new JLabel("");
     JLabel footer = new JLabel("5 - 20011103 Mehmet Keçeci - 20011062 Emir Çağrı Aykın");
 
-
     Timer timer = new Timer(1000, new ActionListener() {
 
         public void actionPerformed(ActionEvent e) {
@@ -44,7 +43,6 @@ public class NewGame implements ActionListener  {
         }
 
     });
-
     int currentLine = 0;
     int currentColumn = 0;
     JButton submit = new JButton("   Guess   ");
@@ -65,9 +63,7 @@ public class NewGame implements ActionListener  {
     JButton btnslash = new JButton("    /   ");
     JButton btnequals = new JButton("   =  ");
     JButton btndelete = new JButton("   Delete   ");
-
-    JButton btnSave = new JButton("Save game");
-
+    JButton btnSave = new JButton("Continue later");
 
     JPanel main = new JPanel( new BorderLayout() );
     JLabel CorrOrWrong = new JLabel("---");
@@ -83,13 +79,7 @@ public class NewGame implements ActionListener  {
             started=true;
         }
         generatedEquation = GenerateEquation();
-       /* Statistics stats = new Statistics();
-        stats.setAvgFinishAtLines(2);
-        stats.setLosses(3);
-        stats.setVictory(8);
-        stats.setAvgSuccessTime(null);
-        stats.setUnfinishedGames(1);
-        writeStatistics(stats);*/
+
 
         frame = new JFrame("Nerdle");// tum pencere ve ismi
         //frame.getContentPane().add(draw);
@@ -152,11 +142,11 @@ public class NewGame implements ActionListener  {
         buttonsPanel.add(btn0);
         //buttonsPanel.add(back);
         buttonsPanel.add(btnSave);
-        buttonsPanel.add(btnplus);
-        buttonsPanel.add(btnminus);
-        buttonsPanel.add(btncross);
-        buttonsPanel.add(btnslash);
-        buttonsPanel.add(btnequals);
+       btnplus.setFont(new Font("Arial", Font.PLAIN, 16)); buttonsPanel.add(btnplus);
+        btnminus.setFont(new Font("Arial", Font.PLAIN, 16)); buttonsPanel.add(btnminus);
+        btncross.setFont(new Font("Arial", Font.PLAIN, 16));buttonsPanel.add(btncross);
+        btnslash.setFont(new Font("Arial", Font.PLAIN, 16));buttonsPanel.add(btnslash);
+        btnequals.setFont(new Font("Arial", Font.PLAIN, 16));buttonsPanel.add(btnequals);
         buttonsPanel.add(btndelete);
 
         buttonsPanel.add(submit);
@@ -391,9 +381,8 @@ public class NewGame implements ActionListener  {
 
         }
         else if (e.getSource() == btndelete){
-            index[currentLine][currentColumn].setText("");
             back();
-
+            //index[currentLine][currentColumn].setText("");
         }
         else if(e.getSource() == btnSave){
            try{
@@ -426,9 +415,19 @@ public class NewGame implements ActionListener  {
 
     private void back() {
         if(currentColumn>0){
-            index[currentLine][--currentColumn].requestFocus();
+            if(index[currentLine][currentColumn].getText().compareTo("")==0){
+                index[currentLine][--currentColumn].requestFocus();
+            }
+
+            else{
+                index[currentLine][currentColumn].requestFocus();
+                index[currentLine][currentColumn].setText("");
+            }
+
 
         }else {
+            if(index[currentLine][currentColumn].getText().compareTo("")!=0)
+                index[currentLine][currentColumn].setText("");
             index[currentLine][currentColumn].requestFocus();
 
         }
