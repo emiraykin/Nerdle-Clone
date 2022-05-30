@@ -37,7 +37,7 @@ public class Continue implements ActionListener  {
             elapsedTime=elapsedTime+1000;
             hours = (elapsedTime/3600000);
             minutes = (elapsedTime/60000) % 60;
-            seconds = (elapsedTime/1000) % 60;
+            seconds = (elapsedTime/1000) ;
             seconds_string = String.format("%02d", seconds);
             minutes_string = String.format("%02d", minutes);
             hours_string = String.format("%02d", hours);
