@@ -118,12 +118,8 @@ public class Test extends JFrame {
     /**
      * @param args the command line arguments
      */
-    public static void main(String args[]) {
-        /* Set the Nimbus look and feel */
-        //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
-        /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
-         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html
-         */
+    /*public static void main(String args[]) {
+
         try {
             for (UIManager.LookAndFeelInfo info : UIManager.getInstalledLookAndFeels()) {
                 if ("Nimbus".equals(info.getName())) {
@@ -142,13 +138,13 @@ public class Test extends JFrame {
         }
         //</editor-fold>
 
-        /* Create and display the form */
+        Create and display the form
         EventQueue.invokeLater(new Runnable() {
             public void run() {
                 new Test().setVisible(true);
             }
         });
-    }
+    }*/
 
     // Variables declaration - do not modify
     private JButton btnBack;
@@ -174,7 +170,7 @@ public class Test extends JFrame {
      */
     private void $$$setupUI$$$() {
         final JPanel panel1 = new JPanel();
-        panel1.setLayout(new com.intellij.uiDesigner.core.GridLayoutManager(1, 1, new Insets(0, 0, 0, 0), -1, -1));
+        //panel1.setLayout(new com.intellij.uiDesigner.core.GridLayoutManager(1, 1, new Insets(0, 0, 0, 0), -1, -1));
     }
     // End of variables declaration
 }

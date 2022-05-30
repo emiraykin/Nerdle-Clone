@@ -556,7 +556,7 @@ public class Continue implements ActionListener  {
 
 
 
-
+/*
     public static void main(String[] args) {
         //Create the sudoku
         //SudokuGenerator SDGN = new SudokuGenerator();
@@ -568,7 +568,7 @@ public class Continue implements ActionListener  {
         }
 
         new GUI();
-    }
+    }*/
 
 
 }
