@@ -1,7 +1,6 @@
 package Core.Equation;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 
 public class EquationControls {
 
@@ -19,7 +18,7 @@ public class EquationControls {
      */
     public static void checkCharactersStatus(String Equation,String playerInput,ArrayList<Integer> status,ArrayList<Boolean> ifVisited){
         int i,j;
-        for (int k = 0; k < Equation.length(); k++) { // creates lists
+        for (int k = 0; k < Equation.length(); k++) { // Create lists
             status.add(3);
             ifVisited.add(false);
         }
@@ -92,7 +91,6 @@ public class EquationControls {
        // if(!Equation.matches(pattern)) return false;
         int i,equalsCounter=0,opCounter=0;
         boolean flagOperationAfterEqualsSign = false;
-
         //if first or last character is an operator return false
         if(EquationUtilities.isOperator(Equation.charAt(0)) || EquationUtilities.isOperator(Equation.charAt(Equation.length()-1)))
             return false;
@@ -116,10 +114,20 @@ public class EquationControls {
             //counts how many operations
             if(EquationUtilities.isOperator(Equation.charAt(i))) opCounter++;
         }
+
         //if there are no equal or operation sign, or operation sign is more than 3 (which is max ops for
         //max length) or equals sign more than 1 (which is max for all equations) return false
-        if(equalsCounter == 0 ||opCounter == 0 ||opCounter>3 || equalsCounter>1) return false;
-        else return true;
+        if(equalsCounter == 0 ||opCounter == 0 ||opCounter>2 || equalsCounter>1) return false;
+
+        for(i=0;i<Equation.length();i++){
+            //if input is not a digit or operation or equals sign return false;
+            if(Equation.charAt(i)!='0' && Equation.charAt(i)!='1' && Equation.charAt(i)!='2' && Equation.charAt(i)!='3' &&
+                    Equation.charAt(i)!='4' && Equation.charAt(i)!='5' && Equation.charAt(i)!='6' && Equation.charAt(i)!='7'
+                    && Equation.charAt(i)!='8' && Equation.charAt(i)!='9' && Equation.charAt(i) != '=' && !EquationUtilities.isOperator(Equation.charAt(i)))
+                return false;
+        }
+
+        return true;
     }
 }
 
