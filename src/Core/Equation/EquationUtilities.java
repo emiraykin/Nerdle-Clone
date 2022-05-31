@@ -50,6 +50,7 @@ public class EquationUtilities {
         return result;
     }
 
+
     //check if a character in string is operator or not
     public static boolean isOperator(char c){
         return c == '+' || c == '-' || c == '*' || c == '/';

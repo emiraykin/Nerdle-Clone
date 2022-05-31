@@ -22,12 +22,20 @@ public class EquationControls {
             status.add(3);
             ifVisited.add(false);
         }
+        //User Input at the right location
+        for(i=0;i<Equation.length();i++){
+            if(Equation.charAt(i) == playerInput.charAt(i)){
+                status.set(i,0);
+                ifVisited.set(i,true);
+            }
+        }
+
         for( i=0;i<Equation.length();i++){
             for(j=0;j<Equation.length();j++){
                 //User Input not in the right location, but exists in the equation
                 if(playerInput.charAt(i) == Equation.charAt(j) && !ifVisited.get(j)){
                     status.set(i,1);
-                    ifVisited.set(j,true);
+                    ifVisited.set(i,true);
                     break;
                 }
             }
@@ -36,13 +44,8 @@ public class EquationControls {
                 status.set(i,2);
             }
         }
-        //User Input at the right location
-        for(i=0;i<Equation.length();i++){
-            if(Equation.charAt(i) == playerInput.charAt(i)){
-                status.set(i,0);
-                ifVisited.set(i,true);
-            }
-        }
+
+
 
     }
     /*
@@ -89,7 +92,7 @@ public class EquationControls {
      */
     public static boolean EquationRegexControl(String Equation){
        // if(!Equation.matches(pattern)) return false;
-        int i,equalsCounter=0,opCounter=0;
+        int i;
         boolean flagOperationAfterEqualsSign = false;
         //if first or last character is an operator return false
         if(EquationUtilities.isOperator(Equation.charAt(0)) || EquationUtilities.isOperator(Equation.charAt(Equation.length()-1)))
@@ -98,10 +101,6 @@ public class EquationControls {
             //if two operators are in series or an operator is right behind equals sign, return false
             if(EquationUtilities.isOperator(Equation.charAt(i-1))  && (EquationUtilities.isOperator(Equation.charAt(i)) || Equation.charAt(i) == '='))
                 return false;
-            //counts equal character in player input
-            if (Equation.charAt(i) == '=')
-                equalsCounter++;
-
             if(flagOperationAfterEqualsSign){
                 //if there is an operator after equals sign return false
                 if(Equation.charAt(i-1) == '=' && Equation.charAt(i) != '-'){
@@ -111,22 +110,45 @@ public class EquationControls {
                 }
             }
             if (Equation.charAt(i) == '=') flagOperationAfterEqualsSign = true;
-            //counts how many operations
-            if(EquationUtilities.isOperator(Equation.charAt(i))) opCounter++;
-        }
 
+        }
         //if there are no equal or operation sign, or operation sign is more than 3 (which is max ops for
         //max length) or equals sign more than 1 (which is max for all equations) return false
-        if(equalsCounter == 0 ||opCounter == 0 ||opCounter>2 || equalsCounter>1) return false;
+        //if there is a character which is not a digit or operation return false;
+        return hasOnlyDigitsAndOperators(Equation) && hasValidAmountOfOperators(Equation) && hasExactlyOneEquals(Equation);
+    }
 
-        for(i=0;i<Equation.length();i++){
+    /*
+        THIS METHODS WILL BE USED IN UNIT TEST OF Generate.GenerateEquation
+     */
+    public static boolean isEquationLengthValid(String eq){
+        return eq.length() >= 7 && eq.length() <= 9;
+    }
+
+    public static boolean hasExactlyOneEquals(String eq){
+        int counter = 0;
+        for (int i=0; i< eq.length();i++){
+            if (eq.charAt(i) == '=') counter++;
+        }
+        return counter == 1;
+    }
+
+    public static boolean hasValidAmountOfOperators(String eq){
+        int counter = 0;
+        for (int i=0; i< eq.length();i++){
+            if (EquationUtilities.isOperator(eq.charAt(i))) counter++;
+        }
+        return counter == 1 || counter == 2;
+    }
+
+    public static boolean hasOnlyDigitsAndOperators(String Equation){
+        for(int i=0;i<Equation.length();i++){
             //if input is not a digit or operation or equals sign return false;
             if(Equation.charAt(i)!='0' && Equation.charAt(i)!='1' && Equation.charAt(i)!='2' && Equation.charAt(i)!='3' &&
                     Equation.charAt(i)!='4' && Equation.charAt(i)!='5' && Equation.charAt(i)!='6' && Equation.charAt(i)!='7'
                     && Equation.charAt(i)!='8' && Equation.charAt(i)!='9' && Equation.charAt(i) != '=' && !EquationUtilities.isOperator(Equation.charAt(i)))
                 return false;
         }
-
         return true;
     }
 }
