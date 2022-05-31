@@ -29,24 +29,23 @@ public class EquationControls {
                 ifVisited.set(i,true);
             }
         }
-
+        //User input exists in the equation but in the wrong place
         for( i=0;i<Equation.length();i++){
-            for(j=0;j<Equation.length();j++){
-                //User Input not in the right location, but exists in the equation
-                if(playerInput.charAt(i) == Equation.charAt(j) && !ifVisited.get(j)){
-                    status.set(i,1);
-                    ifVisited.set(i,true);
-                    break;
+            if(!ifVisited.get(i)){
+                for(j=0;j<Equation.length();j++){
+                    //User Input not in the right location, but exists in the equation
+                    if(playerInput.charAt(i) == Equation.charAt(j) && !ifVisited.get(j)){
+                        status.set(i,1);
+                        ifVisited.set(i,true);
+                        break;
+                    }
                 }
-            }
-            //User Input nor in the right location or exists in the equation
-            if (j == Equation.length()){
-                status.set(i,2);
+
             }
         }
-
-
-
+        //User Input nor in the right location or exists in the equation
+        for (i=0;i<Equation.length();i++)
+            if (!ifVisited.get(i)) status.set(i,2);
     }
     /*
         Returns True if equation is valid

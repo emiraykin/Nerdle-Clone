@@ -1,6 +1,7 @@
 package Core;
 
 import Core.Equation.EquationControls;
+import Core.Equation.EquationUtilities;
 import Frontend.*;
 
 import java.util.ArrayList;
@@ -26,7 +27,7 @@ public class Main {
         }
         writeStatistics(stats);
         GUI gui = new GUI();
-        gui.setVisible(true);
+         gui.setVisible(true);
         Statistics s = new Statistics();
         IO io = new IO(); // READ STATISTICS FROM FILE
 /*
@@ -73,6 +74,15 @@ public class Main {
         /*s.PrintStatsToTerminal(s);
         String equation = eq.GenerateEquation();*/
         //System.out.println(equation);
+        ArrayList<Integer> status = new ArrayList<>();
+        ArrayList<Boolean> ifVisited = new ArrayList<>();
+        String eq = "7-1+3=9";
+        String EQ = "1+1+1=3";
+        EquationControls.checkCharactersStatus(eq,EQ,status,ifVisited);
+        System.out.println(eq);
+        System.out.println(EQ);
+        System.out.println(ifVisited);
+        System.out.println(status);
 
     }
 
