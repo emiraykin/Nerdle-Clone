@@ -4,8 +4,6 @@ package Frontend;/*
 */
 
 import Core.Statistics;
-import Frontend.NewGame;
-import Frontend.Test;
 
 import javax.swing.*;
 import java.io.File;
@@ -108,7 +106,7 @@ public class GUI extends javax.swing.JFrame {
             }
         });
 
-        btnTest.setText("Test");
+        btnTest.setText("UnitTest");
         btnTest.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnTestActionPerformed(evt);
@@ -260,8 +258,8 @@ public class GUI extends javax.swing.JFrame {
     }
 
     private void btnTestActionPerformed(java.awt.event.ActionEvent evt) {
-        Test test = new Test();
-        test.setVisible(true);
+        TestPage testPage = new TestPage();
+        testPage.setVisible(true);
 
         this.dispose();
     }
