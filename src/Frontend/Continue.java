@@ -170,7 +170,7 @@ public class Continue implements ActionListener  {
 
 
         frame.getContentPane().add(main);
-        frame.getContentPane().add(CorrOrWrong, "North");
+        //frame.getContentPane().add(CorrOrWrong, "North");
         frame.getContentPane().add(footer, "South");
 
         frame.setLocationRelativeTo(null);
@@ -277,12 +277,13 @@ public class Continue implements ActionListener  {
                 else {
                     if(currentLine==5){
                         stop();
-                        JOptionPane.showMessageDialog(frame, "You lost. Redirecting to Menu\n ",
+                        JOptionPane.showMessageDialog(frame, "You lost. Equation was : "+generatedEquation+ "  . Redirecting to menu",
                                 "Game Over", JOptionPane.INFORMATION_MESSAGE);
                         Statistics stats = new Statistics();
                         stats=readStatistics();
                         stats.setLosses(stats.getLosses()+1);
                         writeStatistics(stats);
+                        frame.getContentPane().add(CorrOrWrong, "North");
                         File file = new File("SavedGame.dat");
                         file.delete();
                         GUI gui = new GUI();

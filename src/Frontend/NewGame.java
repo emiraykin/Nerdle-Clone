@@ -164,7 +164,7 @@ public class NewGame implements ActionListener  {
         //frame.getContentPane().add(submit,"South");
         //frame.getContentPane().add(back,"West");
 
-        frame.getContentPane().add(CorrOrWrong, "North");
+        //frame.getContentPane().add(CorrOrWrong, "North");
         //frame.getContentPane().add(time, "South");
         frame.getContentPane().add(footer, "South");
 
@@ -270,12 +270,14 @@ public class NewGame implements ActionListener  {
                 else {
                     if(currentLine==5){
                         stop();
-                        JOptionPane.showMessageDialog(frame, "You lost. Redirecting to Menu\n ",
+                        JOptionPane.showMessageDialog(frame, "You lost. Equation was : "+generatedEquation+ "  . Redirecting to menu",
                                 "Game Over", JOptionPane.INFORMATION_MESSAGE);
                         Statistics stats = new Statistics();
                         stats=readStatistics();
                         stats.setLosses(stats.getLosses()+1);
                         writeStatistics(stats);
+                        frame.getContentPane().add(CorrOrWrong, "North");
+
                         GUI gui = new GUI();
                         gui.setVisible(true);
 
