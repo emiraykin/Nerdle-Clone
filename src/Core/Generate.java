@@ -62,7 +62,7 @@ public class Generate {
         }while (equationString.length() < 7|| equationString.length() > 9 );
 
 
-
         return equationString;
     }
+
 }

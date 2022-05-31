@@ -4,10 +4,17 @@ package Frontend;/*
 */
 
 import Core.Statistics;
-import Frontend.NewGame;
-import Frontend.Test;
+
+import javax.swing.*;
+import java.io.File;
 
 import static Core.Statistics.readStatistics;
+/** ANA MENÜNÜN OLDUĞU FRAME SAYFASI */
+
+
+
+
+
 
 /**
  *
@@ -37,7 +44,10 @@ public class GUI extends javax.swing.JFrame {
                 lblAttemps.setText("-");
                 lblTime.setText("-");
             }
-
+            File f = new File("SavedGame.dat");
+            if (!f.exists()){
+                btnContinue.setVisible(false);
+            }
         }catch (Exception e){
 
         }
@@ -96,7 +106,7 @@ public class GUI extends javax.swing.JFrame {
             }
         });
 
-        btnTest.setText("Test");
+        btnTest.setText("UnitTest");
         btnTest.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnTestActionPerformed(evt);
@@ -224,10 +234,21 @@ public class GUI extends javax.swing.JFrame {
     }// </editor-fold>
 
     private void btnNewGameActionPerformed(java.awt.event.ActionEvent evt) {
-        NewGame newGame = new NewGame();
-        //newGame.setVisible(true);
+       // NewGame newGame = new NewGame();
+        File file = new File("SavedGame.dat");
+        if(file.exists()){
+            int dialogButton = JOptionPane.YES_NO_OPTION;
+            int dialogResult = JOptionPane.showConfirmDialog (this, "Your saved game will be deleted. Are you sure you want to start a new game?","Warning",dialogButton);
+            if(dialogResult == JOptionPane.YES_OPTION){
+                file.delete();
+                NewGame newGame = new NewGame();
+                this.dispose();
+            }
+        }else{
+            NewGame newGame = new NewGame();
+            this.dispose();
+        }
 
-        this.dispose();           // TODO add your handling code here:
     }
 
     private void btnContinueActionPerformed(java.awt.event.ActionEvent evt) {
@@ -237,8 +258,8 @@ public class GUI extends javax.swing.JFrame {
     }
 
     private void btnTestActionPerformed(java.awt.event.ActionEvent evt) {
-        Test test = new Test();
-        test.setVisible(true);
+        TestPage testPage = new TestPage();
+        testPage.setVisible(true);
 
         this.dispose();
     }
@@ -246,12 +267,13 @@ public class GUI extends javax.swing.JFrame {
     /**
      * @param args the command line arguments
      */
+    /*
     public static void main(String args[]) {
         /* Set the Nimbus look and feel */
         //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
         /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
          * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html
-         */
+
         try {
             for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
                 if ("Nimbus".equals(info.getName())) {
@@ -270,13 +292,13 @@ public class GUI extends javax.swing.JFrame {
         }
         //</editor-fold>
 
-        /* Create and display the form */
+
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
                 new GUI().setVisible(true);
             }
         });
-    }
+    }*/
 
     // Variables declaration - do not modify
     private javax.swing.JButton btnContinue;
