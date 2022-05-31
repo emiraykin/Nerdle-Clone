@@ -17,6 +17,7 @@ import static Core.Statistics.readStatistics;
 import static Core.Statistics.writeStatistics;
 
 public class NewGame implements ActionListener  {
+    // kullanılacak değişkenlerin tanımlanması
     int elapsedTime = 0;
     int seconds =0;
     int minutes =0;
@@ -72,16 +73,17 @@ public class NewGame implements ActionListener  {
     JFrame frame;
 
 
-
+    // GUI constructer'ı
     public NewGame (){
+        // kronometreyi baslar
         if(!started){
             start();
             started=true;
         }
-        generatedEquation = GenerateEquation();
+        generatedEquation = GenerateEquation();             // denklem uretilir
 
-
-        frame = new JFrame("Nerdle");// tum pencere ve ismi
+        // GUI SETUP
+        frame = new JFrame("Nerdle");//
         //frame.getContentPane().add(draw);
         frame.setSize(750,500);
         //submit.addActionListener(this);
@@ -90,7 +92,7 @@ public class NewGame implements ActionListener  {
         main.add(board,BorderLayout.CENTER);
         //JPanel panel = new JPanel();
         board.setLayout(new GridLayout (6,generatedEquation.length()));
-
+        // textfield matrisi oluşturulur
         for (int i =0;i<6;i++)
             for (int j=0;j<generatedEquation.length();j++){
                 index[i][j]=new JTextField(1);
@@ -130,7 +132,7 @@ public class NewGame implements ActionListener  {
         JPanel buttonsPanel = new JPanel();
         buttonsPanel.setPreferredSize(new Dimension(200,100));
 
-
+        //butonlar panele eklenir
         buttonsPanel.add(btn1);
         buttonsPanel.add(btn2);
         buttonsPanel.add(btn3);
@@ -171,7 +173,7 @@ public class NewGame implements ActionListener  {
         frame.setLocationRelativeTo(null);
         frame.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
         submit.addActionListener(this);
-
+        //buttonlara action listener eklenir
         back.addActionListener(this);
         btn0.addActionListener(this);
         btn1.addActionListener(this);
@@ -199,7 +201,7 @@ public class NewGame implements ActionListener  {
         if (e.getSource() == submit)
         {
             String input = "";
-            int j = 0;
+            int j = 0;                      // kullanıcı inputunu string haline getirir
             while (j < generatedEquation.length() && index[currentLine][j].getText().compareTo("")!=0){
                 input =input+index[currentLine][j].getText().charAt(0);
                 j++;
@@ -209,18 +211,23 @@ public class NewGame implements ActionListener  {
         }*/
             System.out.println("---------------------");
             System.out.println(input);
-
-            if(input.length() != generatedEquation.length() || !EquationRegexControl(input) ){
+            // regex kontrolü  yanlıs ise iflere girer( dogru input girildi mi ?)
+            if(!hasValidAmountOfOperators(input)){
+                JOptionPane.showMessageDialog(frame, "maximum amounf of operators should be 2",
+                        "WARNING", JOptionPane.ERROR_MESSAGE);
+            }
+            else if(input.length() != generatedEquation.length() || !EquationRegexControl(input) ){
                 JOptionPane.showMessageDialog(frame, "Invalid Input Error",
                         "WARNING", JOptionPane.ERROR_MESSAGE);
             }else if (!isEquationResultIsTrue(input)){
             JOptionPane.showMessageDialog(frame, "This equation is wrong",
                     "WARNING", JOptionPane.ERROR_MESSAGE);
             }
-            else{
+            else{ // girilen input valid ise denklemleri kiyaslar
                 ArrayList<Integer> status = new ArrayList<Integer>();
                 ArrayList<Boolean> ifVisited = new ArrayList<Boolean>() ;
                 checkCharactersStatus(generatedEquation,input,status,ifVisited);
+               // status fonksiyonu ile gerekli renklere boyanır ve input girilen satiri kilitler.
                 for (int  i = 0; i < generatedEquation.length() ; i++) {
                     switch (status.get(i)){
                         case 0:
@@ -246,6 +253,7 @@ public class NewGame implements ActionListener  {
 
                     }
                 }
+                // Eğer denklem doğruysa kronometreyi sıfırlar ve oyunu sonlandırıp kazandığı belirtilir
                 if(input.compareTo(generatedEquation)==0){
                     if(started){
                         stop();
@@ -254,6 +262,7 @@ public class NewGame implements ActionListener  {
 
                     JOptionPane.showMessageDialog(frame, " You Won. Redirecting to Menu\n ",
                             "Congratulations!", JOptionPane.INFORMATION_MESSAGE);
+                    // istatistikler kaydedilir
                     Statistics stats = new Statistics();
                     stats=readStatistics();
                     stats.setAvgSuccessTime((stats.getAvgSuccessTime() * stats.getVictory() + seconds )/(stats.getVictory() + 1)); /** burayı UNUTMA */
@@ -261,6 +270,7 @@ public class NewGame implements ActionListener  {
                     stats.setVictory(stats.getVictory()+1);
 
                     writeStatistics(stats);
+                    // ana menuye donulur
                     GUI gui = new GUI();
                     gui.setVisible(true);
 
@@ -268,7 +278,7 @@ public class NewGame implements ActionListener  {
 
                 }
                 else {
-                    if(currentLine==5){
+                    if(currentLine==5){ // Oyun hakki dolduysa kullanciya kaybettigi belirtilir. Dogru denklem gosterilip ana menuye donulur.
                         stop();
                         JOptionPane.showMessageDialog(frame, "You lost. Equation was : "+generatedEquation+ "  . Redirecting to menu",
                                 "Game Over", JOptionPane.INFORMATION_MESSAGE);
@@ -301,12 +311,14 @@ public class NewGame implements ActionListener  {
 
 
         }
-        else if( e.getSource() == back){
+        /*else if( e.getSource() == back){
             stop();
             GUI gui = new GUI();
             gui.setVisible(true);
             frame.dispose();
-        }
+        }*/
+
+        // buttonlara basildiginda textfield'a sayi yazilip sonraki satira gecilir.
         else if (e.getSource() == btn0){
             index[currentLine][currentColumn].setText(String.valueOf(0)) ;
             next();
@@ -382,11 +394,11 @@ public class NewGame implements ActionListener  {
             next();
 
         }
-        else if (e.getSource() == btndelete){
+        else if (e.getSource() == btndelete){       // deger varsa silinir yoksa geri gidilir
             back();
             //index[currentLine][currentColumn].setText("");
         }
-        else if(e.getSource() == btnSave){
+        else if(e.getSource() == btnSave){  // index matrisini serialize edip dosyaya yazar.
            try{
 
             SavedGame savedGame = new SavedGame();
@@ -414,7 +426,7 @@ public class NewGame implements ActionListener  {
         }
 
     }
-
+    // geri gitme islemini yapar
     private void back() {
         if(currentColumn>0){
             if(index[currentLine][currentColumn].getText().compareTo("")==0){
@@ -434,7 +446,7 @@ public class NewGame implements ActionListener  {
 
         }
     }
-
+    // butona basılınca ileri gitme islemini yapar
     private void next() {
        if(currentColumn<generatedEquation.length()-1){
            index[currentLine][++currentColumn].requestFocus();
@@ -448,7 +460,7 @@ public class NewGame implements ActionListener  {
 
 
 
-
+    // kronometre  fonksiyonlari
     void start() {
         timer.start();
     }

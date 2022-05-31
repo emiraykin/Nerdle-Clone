@@ -214,8 +214,11 @@ public class Continue implements ActionListener  {
         }*/
             System.out.println("---------------------");
             System.out.println(input);
-
-            if(input.length() != generatedEquation.length() || !EquationRegexControl(input) ){
+            if(!hasValidAmountOfOperators(input)){
+                JOptionPane.showMessageDialog(frame, "maximum amounf of operators should be 2",
+                        "WARNING", JOptionPane.ERROR_MESSAGE);
+            }
+            else if(input.length() != generatedEquation.length() || !EquationRegexControl(input) ){
                 JOptionPane.showMessageDialog(frame, "Invalid Input Error",
                         "WARNING", JOptionPane.ERROR_MESSAGE);
             }else if (!isEquationResultIsTrue(input)){
