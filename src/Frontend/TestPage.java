@@ -8,7 +8,7 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 
 import static Core.Generate.GenerateEquation;
-
+/** Denklem uret,p kullaniciya gosteren test frame'i
 /**
  * @author emirm
  */

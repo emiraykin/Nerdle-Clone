@@ -2,7 +2,7 @@ package Core;
 
 import javax.swing.*;
 import java.io.*;
-
+// oyunu daha kolay kaydedebilmek icin oyunu serialize eden , dosyaya okuyup yazan siniftir.
 public class SavedGame implements Serializable {
     private static final long serialVersionUID = 1L;
     public   JTextField[][] savedMatris ;

@@ -2,7 +2,7 @@ package Frontend;
 
 import Core.SavedGame;
 import Core.Statistics;
-
+                          /** NewGame class'inin aynisi sadece matris dosyadan okunup en başta yaziliyor */
 import java.awt.*;
 import java.awt.event.*;
 import java.io.*;
@@ -93,6 +93,7 @@ public class Continue implements ActionListener  {
         main.add(board,BorderLayout.CENTER);
         //JPanel panel = new JPanel();
 
+        /** oyunu dosyadan okuma islemleri */
 
         if(readGame()!=null){
             SavedGame savedGame = new SavedGame();

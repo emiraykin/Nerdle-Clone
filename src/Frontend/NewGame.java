@@ -81,7 +81,7 @@ public class NewGame implements ActionListener  {
             started=true;
         }
         generatedEquation = GenerateEquation();             // denklem uretilir
-
+        System.out.println(generatedEquation);
         // GUI SETUP
         frame = new JFrame("Nerdle");//
         //frame.getContentPane().add(draw);

@@ -9,6 +9,9 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import java.util.Scanner;
 
+
+// istatistikleri  daha kolay kaydedebilmek icin istatistikleri serialize eden , dosyaya okuyup yazan siniftir.
+
 public class Statistics implements Serializable,ActionListener {
     private static final long serialVersionUID = 1L;
     private static boolean isPlayedBefore;

@@ -9,6 +9,7 @@ import java.util.Scanner;
 
 import static Core.Equation.EquationControls.checkCharactersStatus;
 import static Core.Equation.EquationControls.isEquationResultIsTrue;
+import static Core.Generate.GenerateEquation;
 import static Core.Statistics.readStatistics;
 import static Core.Statistics.writeStatistics;
 
@@ -29,7 +30,7 @@ public class Main {
         GUI gui = new GUI();
          gui.setVisible(true);
         Statistics s = new Statistics();
-        IO io = new IO(); // READ STATISTICS FROM FILE
+
 /*
 
         //PLAYABLE DEMO ON THE TERMINAL
@@ -83,6 +84,7 @@ public class Main {
         System.out.println(EQ);
         System.out.println(ifVisited);
         System.out.println(status);
+        System.out.println(GenerateEquation());
 
     }
 

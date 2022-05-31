@@ -9,11 +9,10 @@ import javax.swing.*;
 import java.io.File;
 
 import static Core.Statistics.readStatistics;
+
+
+
 /** ANA MENÜNÜN OLDUĞU FRAME SAYFASI */
-
-
-
-
 
 
 /**
@@ -106,7 +105,7 @@ public class GUI extends javax.swing.JFrame {
             }
         });
 
-        btnTest.setText("UnitTest");
+        btnTest.setText("Test");
         btnTest.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnTestActionPerformed(evt);
